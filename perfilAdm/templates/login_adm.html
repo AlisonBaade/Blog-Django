@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width= , initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <form action="{% url 'validar_login' %}" method="POST"> {% csrf_token %}
+        <h1>Bem vindo a Área de adm</h1>
+        <label for="email">Email</label>
+        <input id="email" name="email" type="text" placeholder="Insira seu Email">
+
+        <label for="senha">Senha</label>
+        <input id="senha" name="senha" type="text" placeholder="Insira sua Senha">
+        <button type="submit">Entrar</button>
+    </form>
+
+    <div>
+        {% if status == '1' %}
+            <div>
+                <p>Email ou Senha Inválidos</p> 
+            </div>
+        {% endif %}
+        
+        {% if status == '2' %}
+            <div>
+                <p>Você não tem acesso de Administrador</p>
+                <a href="{% url 'login'%}">Volte a Pagina de Login de Usuário</a>
+            </div>
+        {% endif %}
+    </div>
+
+</body>
+</html>

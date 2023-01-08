@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width= , initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'perfilUser/css/style.css' %}">
+</head>
+
+<body>
+    <div class="d-grid img pos-abs">
+        <!-- LOGIN DE USUARIOS -->
+        <div class="container-login ">
+            <form class="d-grid" action="{%url 'valida_login'%}" method="POST"> {%csrf_token%}
+                <h1>Faça Login</h1>
+                <div class="d-grid">
+                    <label class="label" for="email">Email</label>
+                    <input class="tam-input" name="email" type="text" name="email" placeholder="Insira seu Email...">
+                </div>
+                <div class="d-grid">
+                    <label class="label" for="senha">Senha</label>
+                    <input class="tam-input" name="senha" type="password" name="senha" placeholder="Insira sua Senha...">
+                </div>
+                <div class="d-flex jus-cont-center div-width">
+                    <button class="btn cursor-pointer">Entrar</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- CADASTRO DE USUARIOS -->
+        <div class="container-cadastro">
+            <form class="d-grid" action="{%url 'valida_cadastro'%}" method="POST"> {%csrf_token%}
+                <h3>Ainda não tem uma conta ?</h3>
+                <h1>Cadastre-se</h1>
+                
+                <div class="d-grid">
+                    <label class="label"  for="nome">Nome Completo</label>
+                    <input class="tam-input" name="nome" type="text">
+                </div>
+
+                <div class="d-grid">
+                    <label class="label" for="email">Email</label>
+                    <input class="tam-input" name="email" type="text">
+                </div>
+
+                <div class="d-grid">
+                    <label class="label" for="senha">Senha</label>
+                    <input class="tam-input" type="password" name="senha">
+                </div>
+
+                <div class="d-flex">
+                    <label class="label" for="autor">Quero ser Autor de Postagens</label>
+                    <input class="checkbox-cad" type="checkbox" name="autor">
+                </div>
+
+                <div class="d-flex jus-cont-center div-width">
+                    <button class="btn cursor-pointer" type="submit">Cadastrar-se</button>
+                </div>
+
+                {% if status_cadastro == '0'%}
+                <div>
+                    <p>Cadastro realizado com sucesso</p>
+                </div>
+                {% endif %}
+
+                {% if status_cadastro == '1'%}
+                <div>
+                    <p>Nome e email não podem ser campos vazios</p>
+                </div>
+                {% endif %}
+
+                {% if status_cadastro == '2'%}
+                <div>
+                    <p>Sua senha deve ter pelo menos 8 caractéres</p>
+                </div>
+                {% endif %}
+
+                {% if status_cadastro == '3'%}
+                <div>
+                    <p>Usuário ja existe no sistema</p>
+                </div>
+                {% endif %}
+
+                {% if status_cadastro == '4'%}
+                <div>
+                    <p>Erro interno do sistema</p>
+                </div>
+                {% endif %}
+
+            </form>
+        </div>
+
+    </div>
+</body>
+
+</html>
