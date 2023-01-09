@@ -53,11 +53,10 @@ def valida_cadastro(request):
         return redirect('/?status_cadastro=3')
 
     if autor == 'on':
-        autor = True
         try:
         # criptografando a senha do usuario
             senha = sha256(senha.encode()).hexdigest()
-            usuario = Usuario(autor=autor, nome=nome, senha=senha, email=email)
+            usuario = Usuario(tipo='AU', nome=nome, senha=senha, email=email)
             usuario.save()
             
             return redirect('/?status_cadastro=0')
@@ -67,7 +66,7 @@ def valida_cadastro(request):
         try:
         # criptografando a senha do usuario
             senha = sha256(senha.encode()).hexdigest()
-            usuario = Usuario( nome=nome, senha=senha, email=email)
+            usuario = Usuario(tipo='CO', nome=nome, senha=senha, email=email)
             usuario.save()
             
             return redirect('/?status_cadastro=0')
@@ -75,11 +74,30 @@ def valida_cadastro(request):
             return redirect('/?status_cadastro=4')
             
     
-
-
-
-
-
 def logout(request):
     request.session.flush()
     return redirect('/')
+
+######################## ADMINISTRADOR #######################
+
+def home_adm(request):
+    return render(request, 'home_adm.html')
+
+def login_adm(request):
+    if request.session.get('usuario'):
+        return redirect('/home_adm')
+    
+    status = request.GET.get('status')
+    return render(request,'login_adm.html', {'status': status})
+
+def validar_login_adm(request):
+    
+    email = request.POST.get('email')
+    senha = request.POST.get('senha')
+    
+    usuario = Usuario.objects.filter(email=email, senha=senha, tipo='AD')
+
+    if len(usuario) == 0:
+        return redirect('/login_adm/?status=1')
+    elif len(usuario) > 0:
+        return redirect('/home_adm')

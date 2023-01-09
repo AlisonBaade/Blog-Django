@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width= , initial-scale=1.0">
-    <title>Document</title>
+    <title>My BLOG</title>
     <link rel="stylesheet" href="{% static 'perfilUser/css/style.css' %}">
 </head>
 
@@ -30,12 +30,6 @@
                 <br>
                 {% if status_login == '0' %}
                 <div  class="div-status-error">
-                    <p>Usuário não cadastrado</p>
-                </div>
-                {% endif %}
-
-                {% if status_login == '1' %}
-                <div>
                     <p>Email ou Senha incorretos</p>
                 </div>
                 {% endif %}

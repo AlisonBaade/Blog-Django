@@ -11,7 +11,7 @@
     background-size: cover;
     width: 100%;
     height: 100%;
-    opacity: 0.9;
+    opacity: 0.8;
 }
 
 .d-grid{
@@ -34,6 +34,10 @@
     cursor: pointer;
 }
 
+.text-decoration{
+    text-decoration: none;
+}
+
 .container-login{
     margin-top: 5%;
     margin-left: 15%;
@@ -50,11 +54,12 @@
 
 .tam-input{
     margin-top: 3px;
-    height: 30px;
-    width: 70%;
+    height: 40px;
+    width: 80%;
     padding-left: 10px;
     font-size: 17px;
     border-radius: 7px;
+    border: 1px solid transparent;                              
 }
 
 .div-width{
@@ -62,23 +67,24 @@
 }
 
 .btn{
-    margin-top: 10px;
+    margin-top: 5%;
     height: 40px;
     width: 50%;
     font-size: 20px;
     border-radius: 7px;
-    background-color: mintcream;
+    background-color: #ffffff;
+    border: 1px solid transparent;
 }
 
 .btn:hover{
     background-color: transparent;
+    border: 1px solid #ffffff;
 }
 
 .label{
     margin-top: 5px;
-    font-size: 20px;
-    font-family: 'Roboto Slab';
-
+    font-size: 25px;
+    font-family: 'Roboto';
 }
 
 .checkbox-cad{
@@ -101,6 +107,79 @@
     color: red;
 }
 
+/* Área Administrador */
+
+.body-login-adm{
+    background-color: #c9c9c9;
+}
+.header-login{
+    background-color: rgb(80, 80, 80);
+    width: 100%;
+    height: 80px;
+}
+
+.h1-header{
+    padding-top: 1%;
+    color: #ffffff;
+    font-size: 40px;
+}
+
+.footer-login{
+    background-color: rgb(80, 80, 80);
+    width: 100%;
+    height: 80px;
+    margin-top: 200px;
+}
+
+.div-login-adm{
+    height: 300px;
+    margin-top: 10%;
+    display: flex;
+    justify-content: center;
+}
+
+.input-login-adm{
+    height: 40px;
+    font-size: larger;
+    margin-bottom: 3%;
+    padding: 1%;
+    border: 1px solid #ffffff;
+    border-radius: 10px;
+}
+
+.label-login-adm{
+    font-size: 30px;
+    margin-bottom: 3px;
+    margin-left: 5px;
+}
+
+.h2-form-adm{
+    font-size: 50px;
+    font-style: italic;
+    margin-bottom: 3%;
+}
+
+.btn-login-adm{
+    width: 50%;
+    height: 50px;
+    font-size: x-large;
+    border-radius: 10px;
+    border: 1px solid #ffffff;
+    margin-top: 3%;
+}
+
+.btn-login-adm:hover{
+    background-color: rgb(80, 80, 80);
+    color: #ffffff;
+    border: 1px solid rgb(80, 80, 80) ;
+}
+
+.div-info{
+    display: grid;
+    justify-content: center;
+    margin-top: 5%;
+    font-size: 25px;
+}
 
 
 
