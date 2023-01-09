@@ -87,5 +87,21 @@
     margin-left: 10px;
 }
 
+.status-success{
+    margin-top: 2px;
+    font-weight: bold;
+    font-size: 25px;
+    color: rgb(8, 99, 0);
+}
+
+.status-error{
+    margin-top: 2px;
+    font-weight: bold;
+    font-size: 20px;
+    color: red;
+}
+
+
+
 
 

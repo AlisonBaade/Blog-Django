@@ -22,18 +22,17 @@ def valida_login(request):
     senha = request.POST.get('senha')
 
     usuario = Usuario.objects.filter(email=email, senha=senha)
-
+    
     if len(usuario) == 0:
-        pass
+        return redirect('/?status_login=0')
     elif len(usuario) > 0:
         request.session['usuario'] = usuario[0].id
-        return redirect('home/')
+        return redirect('/home')
 
 
 def valida_cadastro(request):
     
     autor = request.POST.get('autor')
-    print(autor)
     nome = request.POST.get('nome')
     email = request.POST.get('email')
     senha = request.POST.get('senha')
@@ -41,8 +40,11 @@ def valida_cadastro(request):
     # verificando se não há nenhum email igual ja cadastrado
     usuario = Usuario.objects.filter(email=email)
 
-    if len(nome.strip()) == 0 or len(email.strip()) == 0:
+    if len(nome.strip()) == 0:
         return redirect('/?status_cadastro=1')
+    
+    if len(email.strip()) == 0:
+        return redirect('/?status_cadastro=5')
 
     if len(senha) < 8:
         return redirect('/?status_cadastro=2')
@@ -53,7 +55,6 @@ def valida_cadastro(request):
     if autor == 'on':
         autor = True
         try:
-            print(autor)
         # criptografando a senha do usuario
             senha = sha256(senha.encode()).hexdigest()
             usuario = Usuario(autor=autor, nome=nome, senha=senha, email=email)
@@ -81,4 +82,4 @@ def valida_cadastro(request):
 
 def logout(request):
     request.session.flush()
-    return redirect('')
+    return redirect('/')

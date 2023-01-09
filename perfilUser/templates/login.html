@@ -27,6 +27,18 @@
                 <div class="d-flex jus-cont-center div-width">
                     <button class="btn cursor-pointer">Entrar</button>
                 </div>
+                <br>
+                {% if status_login == '0' %}
+                <div  class="div-status-error">
+                    <p>Usuário não cadastrado</p>
+                </div>
+                {% endif %}
+
+                {% if status_login == '1' %}
+                <div>
+                    <p>Email ou Senha incorretos</p>
+                </div>
+                {% endif %}
             </form>
         </div>
 
@@ -41,15 +53,32 @@
                     <input class="tam-input" name="nome" type="text">
                 </div>
 
+                {% if status_cadastro == '1'%}
+                <div class="status-error">
+                    <p>Nome não pode ser um campo vazio</p>
+                </div>
+                {% endif %}
+
                 <div class="d-grid">
                     <label class="label" for="email">Email</label>
                     <input class="tam-input" name="email" type="text">
                 </div>
 
+                {% if status_cadastro == '5'%}
+                <div class="status-error">
+                    <p>Email não pode ser um campo vazio</p>
+                </div>
+                {% endif %}
+
                 <div class="d-grid">
                     <label class="label" for="senha">Senha</label>
                     <input class="tam-input" type="password" name="senha">
                 </div>
+                {% if status_cadastro == '2'%}
+                <div class="status-error">
+                    <p>Sua senha deve ter pelo menos 8 caractéres</p>
+                </div>
+                {% endif %}
 
                 <div class="d-flex">
                     <label class="label" for="autor">Quero ser Autor de Postagens</label>
@@ -59,33 +88,21 @@
                 <div class="d-flex jus-cont-center div-width">
                     <button class="btn cursor-pointer" type="submit">Cadastrar-se</button>
                 </div>
-
+                <br>
                 {% if status_cadastro == '0'%}
-                <div>
+                <div class="status-success">
                     <p>Cadastro realizado com sucesso</p>
                 </div>
                 {% endif %}
 
-                {% if status_cadastro == '1'%}
-                <div>
-                    <p>Nome e email não podem ser campos vazios</p>
-                </div>
-                {% endif %}
-
-                {% if status_cadastro == '2'%}
-                <div>
-                    <p>Sua senha deve ter pelo menos 8 caractéres</p>
-                </div>
-                {% endif %}
-
                 {% if status_cadastro == '3'%}
-                <div>
+                <div class="status-error">
                     <p>Usuário ja existe no sistema</p>
                 </div>
                 {% endif %}
 
                 {% if status_cadastro == '4'%}
-                <div>
+                <div class="status-error">
                     <p>Erro interno do sistema</p>
                 </div>
                 {% endif %}
