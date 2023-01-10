@@ -15,7 +15,8 @@
 </header>
 <body class="body-login-adm">
     <div class="div-login-adm">
-        <form action="{% url 'validar_login_adm' %}" method="POST"> {% csrf_token %}
+        <form action="{% url 'valida_login' %}" method="POST">
+            {% csrf_token %}
             <h2 class="h2-form-adm d-grid">Bem vindo a Área de Adm</h2>
             <div class="d-grid">
                 <label class="label-login-adm" for="email">Email</label>
@@ -33,7 +34,7 @@
                     <div class="div-info">
                         <p class="d-flex jus-cont-center status-error">Email ou Senha Inválidos</p> 
                         <p class="d-flex jus-cont-center">Você tem acesso de Administrador ?</p>
-                        <a class="d-flex jus-cont-center text-decoration" href="{% url 'login' %}">Volte a Pagina de Login de Usuário</a>
+                        <a class="d-flex jus-cont-center text-decoration" href="{% url 'login' %}">Volte a Página de Usuários</a>
                     </div>
                 {% endif %}
             </div>

@@ -22,14 +22,16 @@
                 </div>
                 <div class="d-grid">
                     <label class="label" for="senha">Senha</label>
-                    <input class="tam-input" name="senha" type="password" name="senha" placeholder="Insira sua Senha...">
+                    <div class="d-flex">
+                        <input class="tam-input" name="senha" type="password" id="senha" name="senha" placeholder="Insira sua Senha...">
+                    </div>
                 </div>
                 <div class="d-flex jus-cont-center div-width">
-                    <button class="btn cursor-pointer">Entrar</button>
+                    <button type="submit" class="btn cursor-pointer">Entrar</button>
                 </div>
                 <br>
                 {% if status_login == '0' %}
-                <div  class="div-status-error">
+                <div class="status-error">
                     <p>Email ou Senha incorretos</p>
                 </div>
                 {% endif %}
@@ -44,7 +46,7 @@
                 
                 <div class="d-grid">
                     <label class="label"  for="nome">Nome Completo</label>
-                    <input class="tam-input" name="nome" type="text">
+                    <input class="tam-input" name="nome" type="text" placeholder="DIgite seu Nome Completo">
                 </div>
 
                 {% if status_cadastro == '1'%}
@@ -55,7 +57,7 @@
 
                 <div class="d-grid">
                     <label class="label" for="email">Email</label>
-                    <input class="tam-input" name="email" type="text">
+                    <input class="tam-input" name="email" type="text" placeholder="Digite seu Email">
                 </div>
 
                 {% if status_cadastro == '5'%}
@@ -66,7 +68,7 @@
 
                 <div class="d-grid">
                     <label class="label" for="senha">Senha</label>
-                    <input class="tam-input" type="password" name="senha">
+                    <input class="tam-input" type="password" name="senha" placeholder="Mínimo de 8 caractéres">
                 </div>
                 {% if status_cadastro == '2'%}
                 <div class="status-error">
@@ -105,6 +107,7 @@
         </div>
 
     </div>
+    <script src="{% static 'perfilUser/js/index.js' %}"></script>
 </body>
 
 </html>
