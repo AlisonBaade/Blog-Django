@@ -2,14 +2,12 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Usuario
 from hashlib import sha256
+from . import views
 
-
-def home(request):
-    return render(request, 'home.html')
 
 def login(request):
-    if request.session.get('usuario'):
-        return redirect('home/')
+    # if request.session.get('usuario'):
+    #     return redirect('posts/home/')
     status_cadastro = request.GET.get('status_cadastro')
     status_login = request.GET.get('status_login')
     return render(request, 'login.html', {'status_cadastro': status_cadastro,
@@ -29,13 +27,13 @@ def valida_login(request):
             return redirect('/?status_login=0')
         elif len(tam_usuario) > 0:
             request.session['usuario'] = tam_usuario[0].id
-            return redirect('/home')
+            return redirect('/posts/home/')
     elif usuario.tipo == 'CO':
         if len(tam_usuario) == 0:
             return redirect('/?status_login=0')
         elif len(tam_usuario) > 0:
             request.session['usuario'] = tam_usuario[0].id
-            return redirect('/index')
+            return redirect('/posts/index')
     elif usuario.tipo == "AD":
         if len(tam_usuario) == 0:
             return redirect('/login_adm/?status=1')
@@ -94,6 +92,7 @@ def logout(request):
 
 ######################## ADMINISTRADOR #######################
 
+
 def home_adm(request):
     return render(request, 'home_adm.html')
 
@@ -104,3 +103,4 @@ def login_adm(request):
 
     status = request.GET.get('status')
     return render(request, 'login_adm.html', {'status': status})
+
