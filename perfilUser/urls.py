@@ -7,5 +7,6 @@ urlpatterns = [
     path('valida_cadastro/', views.valida_cadastro, name='valida_cadastro'), 
     path('logout/', views.logout, name='logout'),
     path('home_adm/', views.home_adm, name='home_adm'),
+    path('cadastro_area_adm/', views.cadastro_area_adm, name='cadastro_area_adm'),
 ]
     

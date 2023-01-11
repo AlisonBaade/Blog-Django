@@ -127,7 +127,9 @@
 .header{
     width: 100%;
     height: 60px;
-    background-color: #c9c9c9;
+    background-color: rgb(80, 80, 80);
+    font-size: 30px;
+    color: #ffffff;
 }
 .menu-nav{
     background-color: rgb(80, 80, 80);
@@ -155,6 +157,10 @@
 
 .t-align{
     text-align: center;
+}
+
+.form-w{
+    width: 40%;
 }
 
 

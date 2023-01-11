@@ -15,33 +15,68 @@
         </div>
         <nav class="d-grid menu-nav">
             <div class="d-grid t-align">
-                <a class="a-nav text-decoration" href="#">Usuários</a>
-                <a class="a-nav text-decoration" href="#">Categorias</a>
+                <a class="a-nav text-decoration" href="">Usuários</a>
+                <a class="a-nav text-decoration" href="">Categorias</a>
             </div>
         </nav>
-    </section>
         <div class="d-flex jus-cont-center">
-            <form class="d-grid" action="{% url 'valida_cadastro' %}" method="POST"> {%  csrf_token %}
-                <label for="">Nome do Usuário</label>
-                <input type="text" name="nome" id="">
-
-                <label for="">Email</label>
-                <input type="text" name="email" id="">
-
-                <label for="">Senha</label>
-                <input type="password" name="senha" id="">
-                
-                <label for="">Confirmação da Senha</label>
-                <input type="password" name="senha" id="">
-
-                <label for="">Nivel do Usuário</label>
-                <select name="autor" id="">
-                    <option value="AD">Administrador</option>
-                    <option value="AU">Autor</option>
-                </select>
-                <button type="submit">Cadastrar</button>
+            <form class="d-grid form-w" action="{% url 'cadastro_area_adm' %}" method="POST"> {%  csrf_token %}
+                <div class="d-grid">
+                    <label class="label" for="">Nome do Usuário</label>
+                    <input class="" type="text" name="nome" id="">
+                    {% if status == '1' %}
+                        <p class="status-error">Este campo não pode ser vazio</p>
+                    {% endif %}
+                </div>
+                <div class="d-grid">
+                    <label class="label" for="">Email</label>
+                    <input class="" type="text" name="email">
+                    {% if status == '2' %}
+                        <p class="status-error">Este campo não pode ser vazio</p>
+                    {% endif %}
+                </div>
+                <div class="d-grid">
+                    <label class="label" for="">Senha</label>
+                    <input class="" type="password" name="senha">
+                    {% if status == '3' %}
+                        <p class="status-error">Mínimo de 8 caractéres</p>
+                    {% endif %}
+                    {% if status == '5' %}
+                        <p class="status-error">Senhas não conferem</p>
+                    {% endif %}
+                </div>
+                <div class="d-grid">
+                    <label class="label" for="">Confirmação da Senha</label>
+                    <input class="" type="password" name="senha1">
+                    {% if status == '5' %}
+                        <p class="status-error">Senhas não conferem</p>
+                    {% endif %}
+                </div>                
+                <div class="d-grid">
+                    <label class="label" for="">Nivel do Usuário</label>
+                    <select class="" name="autor">
+                        <option value="AD">Administrador</option>
+                        <option value="AU">Autor</option>
+                    </select>
+                </div>
+                <div class="">
+                    <button class="" type="submit">Cadastrar</button>
+                </div>
+                <br>
+                {% if status == '0' %}
+                    <p class="status-success">Cadastro realizado com sucesso</p>
+                {% endif %}
+                {% if status == '4'%}
+                    <p class="status-success">Usuário ja cadastrado</p>
+                {% endif %}
+                {% if status == '6' %}
+                    <p class="status-error">Erro interno do Sistema</p>
+                {% endif %} 
             </form>
         </div>
+        <br>
+        <br>
+        <br>
         <div class="d-flex jus-cont-center">
             <form class="d-grid" action="#" method="POST"> {%  csrf_token %}
                 <label for="">Nome da Categoria</label>
@@ -49,5 +84,6 @@
                 <button type="submit">Cadastrar</button>
             </form>
         </div>
+    </section>
 </body>
 </html>
