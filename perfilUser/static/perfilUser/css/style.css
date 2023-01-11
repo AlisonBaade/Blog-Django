@@ -22,6 +22,10 @@
     display: flex;
 }
 
+.flex-wrap{
+    flex-wrap: wrap;
+}
+
 .jus-cont-center{
     justify-content: center;
 }
@@ -47,8 +51,8 @@
 }
 
 .container-cadastro{
-    margin-left: 15%;
-    width: 25%;
+    margin-left: 5%;
+    width: 50%;
     height: 250px;
 }
 
@@ -107,15 +111,27 @@
     color: red;
 }
 
+.d-width{
+    margin-top: 1%;
+    width: 50%;
+}
+
 /* Área Administrador */
 
-.body-login-adm{
+.body-conf{
+    background-color: #ffffff;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+.header{
+    width: 100%;
+    height: 60px;
     background-color: #c9c9c9;
 }
-.header-login{
+.menu-nav{
     background-color: rgb(80, 80, 80);
-    width: 100%;
-    height: 80px;
+    width: 20%;
 }
 
 .h1-header{
@@ -124,64 +140,21 @@
     font-size: 40px;
 }
 
-.footer-login{
-    background-color: rgb(80, 80, 80);
+.a-nav{
     width: 100%;
-    height: 80px;
-    margin-top: 200px;
-}
-
-.div-login-adm{
-    height: 300px;
-    margin-top: 10%;
-    display: flex;
-    justify-content: center;
-}
-
-.input-login-adm{
     height: 40px;
-    font-size: larger;
-    margin-bottom: 3%;
-    padding: 1%;
-    border: 1px solid #ffffff;
-    border-radius: 10px;
-    padding-left: 3%;
-}
-
-.label-login-adm{
-    font-size: 30px;
-    margin-bottom: 3px;
-    margin-left: 5px;
-}
-
-.h2-form-adm{
-    font-size: 50px;
-    font-style: italic;
-    margin-bottom: 3%;
-}
-
-.btn-login-adm{
-    width: 50%;
-    height: 50px;
-    font-size: x-large;
-    border-radius: 10px;
-    border: 1px solid #ffffff;
-    margin-top: 3%;
-}
-
-.btn-login-adm:hover{
+    font-size: 25px;
     background-color: rgb(80, 80, 80);
     color: #ffffff;
-    border: 1px solid rgb(80, 80, 80) ;
 }
 
-.div-info{
-    display: grid;
-    justify-content: center;
-    margin-top: 5%;
-    font-size: 25px;
+.a-nav:hover{
+    background-color: #c9c9c9;
+    color: black;
 }
 
-
+.t-align{
+    text-align: center;
+}
 
 

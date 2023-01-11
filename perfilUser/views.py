@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from .models import Usuario
 from hashlib import sha256
 from . import views
+from django.utils.timezone import timezone
 
 
 def login(request):
@@ -34,7 +35,7 @@ def valida_login(request):
         elif len(tam_usuario) > 0:
             request.session['usuario'] = tam_usuario[0].id
             return redirect('/posts/index')
-    elif usuario.tipo == "AD":
+    elif usuario.tipo == 'AD':
         if len(tam_usuario) == 0:
             return redirect('/login_adm/?status=1')
         elif len(tam_usuario) > 0:
@@ -48,6 +49,8 @@ def valida_cadastro(request):
     nome = request.POST.get('nome')
     email = request.POST.get('email')
     senha = request.POST.get('senha')
+    senha_1 = request.POST.get('senha1')
+    print(autor)
 
     # verificando se não há nenhum email igual ja cadastrado
     usuario = Usuario.objects.filter(email=email)
@@ -64,7 +67,10 @@ def valida_cadastro(request):
     if len(usuario) > 0:
         return redirect('/?status_cadastro=3')
 
-    if autor == 'on':
+    if senha != senha_1:
+        return redirect('/?status_cadastro=6')
+
+    if autor == 'on' or autor == 'AU':
         try:
             # criptografando a senha do usuario
             senha = sha256(senha.encode()).hexdigest()
@@ -74,9 +80,18 @@ def valida_cadastro(request):
             return redirect('/?status_cadastro=0')
         except:
             return redirect('/?status_cadastro=4')
+        
+    elif autor == 'AD':
+        try:
+            senha = sha256(senha.encode()).hexdigest()
+            usuario = Usuario(tipo='AD', nome=nome, senha=senha, email=email)
+            usuario.save()
+
+            return redirect('/?status_cadastro=0')
+        except:
+            return redirect('/?status_cadastro=4')
     else:
         try:
-            # criptografando a senha do usuario
             senha = sha256(senha.encode()).hexdigest()
             usuario = Usuario(tipo='CO', nome=nome, senha=senha, email=email)
             usuario.save()
@@ -86,15 +101,18 @@ def valida_cadastro(request):
             return redirect('/?status_cadastro=4')
 
 
+
+
 def logout(request):
     request.session.flush()
     return redirect('/')
 
 ######################## ADMINISTRADOR #######################
 
-
 def home_adm(request):
-    return render(request, 'home_adm.html')
+    
+    status = request.GET.get('status')
+    return render(request, 'home_adm.html', {'status': status})
 
 
 def login_adm(request):

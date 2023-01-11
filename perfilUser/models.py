@@ -1,14 +1,24 @@
 from django.db import models
-
+from datetime import date
 
 
 class Usuario(models.Model):
-    choices = [('AD', 'Administrador'), ('AU', 'Autor'), ('CO', 'Comum')]
-
+    nivel_acesso = (
+        ('AD', 'Administrador'),
+        ('AU', 'Autor'),
+        ('CO', 'Comum')
+    )
+    
+    sexo = (
+        ('M', 'Masculino'),
+        ('F', 'Feminio')
+    )
     nome = models.CharField(max_length=50)
     email = models.EmailField()
-    tipo = models.CharField(max_length=30, choices=choices)
+    tipo = models.CharField(max_length=2, choices=nivel_acesso, default=nivel_acesso[0])
     senha = models.CharField(max_length=64)
+    data_nascimento = models.DateField(blank=True, null=True)
+    sexo_usuario = models.CharField(max_length=1,choices=sexo, default=sexo[0], blank=True, null=True)
     
 
     def __str__(self):
