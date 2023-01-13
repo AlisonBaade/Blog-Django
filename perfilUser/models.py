@@ -20,6 +20,8 @@ class Usuario(models.Model):
     data_nascimento = models.DateField(blank=True, null=True)
     sexo_usuario = models.CharField(max_length=1,choices=sexo, default=sexo[0], blank=True, null=True)
     
-
+    class Meta:
+        ordering = ['nome']
+    
     def __str__(self):
         return self.nome

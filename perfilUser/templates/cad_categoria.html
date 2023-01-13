@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Área Adm</title>
+    <link rel="stylesheet" href="{% static 'perfilUser/css/style.css' %}">
+</head>
+
+<body class="body-conf">
+    <section>
+        <div class="header d-flex jus-cont-center">
+            <h1>Área de Administração MyBlog</h1>
+        </div>
+        <nav class="d-grid menu-nav">
+            <div class="d-grid t-align">
+                <a class="a-nav text-decoration" href="{% url 'home_adm' %}">Usuários</a>
+                <a class="a-nav text-decoration" href="{% url 'cad_categoria' %}">Categorias</a>
+            </div>
+        </nav>
+        <br>
+        <br>
+        <div class="d-flex jus-cont-center">
+            <form class="d-grid" action="{% url 'cadastro_categoria' %}" method="POST"> {% csrf_token %}
+                <div>
+                    <label for="">Nome da Categoria</label>
+                    <input type="text" name="nome_categoria">
+                    {% if status == '1' %}
+                    <p class="status-error">Este campo não pode ser vazio</p>
+                    {% endif %}
+                </div>
+                <button type="submit">Cadastrar</button>
+                {% if status == '0' %}
+                <p class="status-success">Cadastro realizado com sucesso</p>
+                {% endif %}
+            </form>
+        </div>
+    </section>
+    <section>
+        <div>
+            <h2>Categorias Cadastradas</h2>
+            {% for categoria in categorias %}
+                <p>
+                    {{categoria.nome}}
+                </p>
+            {% endfor %}
+        </div>
+
+        <div>
+            <h3>Quantidade de categorias cadastradas</h3>
+            {{qnt_categoria}}
+        </div>
+    </section>
+</body>
+
+</html>

@@ -4,11 +4,12 @@ from .models import Usuario
 from hashlib import sha256
 from . import views
 from django.utils.timezone import timezone
+from Postagem.models import Categoria
 
 
 def login(request):
-    # if request.session.get('usuario'):
-    #     return redirect('posts/home/')
+    if request.session.get('usuario'):
+        return redirect('posts/home/')
     status_cadastro = request.GET.get('status_cadastro')
     status_login = request.GET.get('status_login')
     return render(request, 'login.html', {'status_cadastro': status_cadastro,
@@ -21,29 +22,21 @@ def valida_login(request):
     senha = sha256(senha.encode()).hexdigest()
 
     usuario = Usuario.objects.filter(email=email, senha=senha).first()
-    tam_usuario = Usuario.objects.filter()
 
-    try:
-        if usuario.tipo == 'AU':
-            if len(tam_usuario) == 0:
-                return redirect('/?status_login=0')
-            elif len(tam_usuario) > 0:
-                request.session['usuario'] = tam_usuario[0].id
-                return redirect('/posts/home/')
-        elif usuario.tipo == 'CO':
-            if len(tam_usuario) == 0:
-                return redirect('/?status_login=0')
-            elif len(tam_usuario) > 0:
-                request.session['usuario'] = tam_usuario[0].id
-                return redirect('/posts/index')
-        elif usuario.tipo == 'AD':
-            if len(tam_usuario) == 0:
-                return redirect('/status_login=0')
-            elif len(tam_usuario) > 0:
-                request.session['usuario'] = tam_usuario[0].id
-                return redirect('/home_adm')
-    except AttributeError:
+    
+    if usuario:
+        if usuario.tipo == "AU":
+            request.session['usuario'] = usuario.id
+            return redirect('/posts/home/')                    
+        if usuario.tipo == 'CO':
+            request.session['usuario'] = usuario.id
+            return redirect('/posts/index')
+        if usuario.tipo == 'AD':
+            request.session['usuario'] = usuario.id
+            return redirect('/home_adm')
+    if not usuario:
         return redirect('/?status_login=0')
+                
 
 
 def valida_cadastro(request):
@@ -99,10 +92,13 @@ def logout(request):
 
 ######################## ADMINISTRADOR #######################
 
-
 def home_adm(request):
+    usuarios = Usuario.objects.all()
+    qnt_usuarios = usuarios.count()
     status = request.GET.get('status')
-    return render(request, 'home_adm.html', {'status': status})
+    return render(request, 'home_adm.html', {'status': status,
+                                             'usuarios': usuarios,
+                                             'qnt_usuarios': qnt_usuarios})
 
 
 def cadastro_area_adm(request):
@@ -112,6 +108,7 @@ def cadastro_area_adm(request):
     nome = request.POST.get('nome')
     senha = request.POST.get('senha')
     senha_1 = request.POST.get('senha1')
+    sexo = request.POST.get('sexo')
     
     usuario = Usuario.objects.filter(email=email)
 
@@ -133,7 +130,7 @@ def cadastro_area_adm(request):
     if autor == 'AU':
         try:
             senha = sha256(senha.encode()).hexdigest()
-            usuario = Usuario(tipo='AD', nome=nome, senha=senha, email=email)
+            usuario = Usuario(tipo='AD', nome=nome, senha=senha, email=email, sexo_usuario=sexo)
             usuario.save()
             return redirect('/home_adm/?status=0')
         except:
@@ -141,14 +138,35 @@ def cadastro_area_adm(request):
     elif autor == 'AD': # CADASTRO APENAS DENTRO DA ÁREA DE ADM
         try:
             senha = sha256(senha.encode()).hexdigest()
-            usuario = Usuario(tipo='AD', nome=nome, senha=senha, email=email)
+            usuario = Usuario(tipo='AD', nome=nome, senha=senha, email=email, sexo_usuario=sexo)
             usuario.save()
 
             return redirect('/home_adm/?status=0')
         except:
             return redirect('/home_adm/?status=4')
 
-def a(request, form_usuario):
-    pass
+
+def cadastro_categoria(request):
+    
+    nome = request.POST.get('nome_categoria')
+    categoria = Categoria.objects.filter(nome=nome)
+    
+    if len(nome.strip()) == 0:
+        return redirect('/home_adm/?status=1')
+    
+    
+    categoria = Categoria(nome=nome)
+    categoria.save()
+    return redirect('/cad_categoria/?status=0')
+    
+    
+def cad_categoria(request):
+    categorias = Categoria.objects.all()
+    qnt_categoria = categorias.count()
+    status = request.POST.get('status')
+    return render(request, 'cad_categoria.html', {'status': status,
+                                                  'categorias': categorias,
+                                                  'qnt_categoria': qnt_categoria})   
+
 
 

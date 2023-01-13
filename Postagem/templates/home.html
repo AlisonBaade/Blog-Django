@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,9 +7,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width= , initial-scale=1.0">
     <title>{{usuario.nome}}</title>
+    <link rel="stylesheet" href="{% static 'perfilUser/css/style.css' %}">
 </head>
-<body>
-    <p>home usuario autor</p>
+<body> 
+    <section class="d-flex">
+        <form class="d-grid" action="{% url 'cadastro_post' %}" method="POST" enctype="multipart/form-data">
+            {%csrf_token%}
+            <label for="imagem">Insira imagem principal do seu Post</label>
+            <input type="file" name="imagem" id=""  accept="image/*">
+
+            <label for="titulo">Escreva um Título</label>
+            <input name="titulo" type="text">
+            <label for="">Selecione a categoria em que seu post se encaixa</label>
+
+            <select name="categoria">
+                {% for categoria in categorias %}
+                <option value="{{categoria.nome}}">{{categoria.nome}}</option>
+                {% endfor %}
+            </select>
+
+            <label for="conteudo">Digite o conteúdo do seu Post</label>
+            <textarea name="conteudo" cols="30" rows="10"></textarea>
+
+            <input name="autor" type="hidden" value="{{usuario_logado}}">
+            <button type="submit">Postar</button>
+        </form>
+    </section>
 </body>
 </html>
 
