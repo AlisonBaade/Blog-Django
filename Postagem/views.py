@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from . import views
 from django.http import HttpResponse
-from .models import Categoria, Post
+from .models import Categoria, Post, Comentario
 from perfilUser.models import Usuario
 from datetime import datetime
 
@@ -19,29 +19,36 @@ def home(request):
 
 
 def index(request):
-    
-    categorias = Categoria.objects.filter()
-    posts = Post.objects.filter()
-    
-    return render(request, 'index.html', {'categorias': categorias,
-                                          'posts': posts})
+    if request.session.get('usuario'):  
+        categorias = Categoria.objects.filter()
+        posts = Post.objects.filter()
+        usuario = Usuario.objects.filter(id=request.session.get('usuario')).first()
+        usuario_logado = usuario
+
+        return render(request, 'index.html', {'categorias': categorias,
+                                              'posts': posts,
+                                              'usuario_logado' : usuario_logado})
     
     
 def ver_post(request, id): 
     if request.session.get('usuario'):
-        
-        post = Post.objects.filter(id = id).first()
-        
-        return render(request, 'ver_post.html', {'post': post,
-                                                 })
+        posts = Post.objects.filter(id = id)
+        usuario = Usuario.objects.filter(id=request.session.get('usuario')).first()
+        usuario_logado = usuario
+    ############ FILTRAR COMENTÁRIOS DA POSTAGEM ############
+        comentarios = Comentario.objects.all()
+
+        return render(request, 'ver_post.html', {'posts': posts,
+                                                 'comentarios': comentarios,
+                                                 'usuario_logado': usuario_logado})
 
 
 def cadastro_post(request):
     
     if request.method == 'POST':
         
-        imagem_upload = request.FILES.get('imagem')
-        print(imagem_upload)
+        imagem_upload = request.FILES.get('imagem', None)
+
         titulo = request.POST.get('titulo')
         categoria_name = request.POST.get('categoria')
         categoria_filtered = Categoria.objects.filter(nome=categoria_name).first()

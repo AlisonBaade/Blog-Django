@@ -1,16 +1,14 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% include 'header.html' %}
+<body  class="body-conf">
     {% for post in posts %}
-        <img src="{{post.imagem.url}}">
-        <a href="{% url 'ver_post' post.id %}">{{ post.titulo }}</a>
-        <hr>
+    <div class="d-flex jus-cont-center">
+        <div class="d-flex flex-dir alg-itens-center">
+            <a class="titulo-post text-decoration" href="{% url 'ver_post' post.id %}">{{ post.titulo }}</a>
+            <img style="width: 600px;" src="{{post.imagem.url}}">
+        </div>
+    </div>
+    <hr>
     {%endfor%}
+
 </body>
-</html>
+{% include 'footer.html' %}

@@ -1,17 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width= , initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <p>{{post.titulo}}</p>
+{% include 'header.html' %}
 
-    <div>
-        <textarea name="" id="" cols="30" rows="10">Máximo 100 caractéres</textarea>
-    </div>
-    
+<body class="body-conf">
+    <a href="{% url 'index' %}">Voltar</a>
+    <section class="d-flex flex-dir alg-itens-center">
+        {% for post in posts %}
+            <h1 class="title-post">{{post.titulo}}</h1>
+            <img style="width: 800px;" src="{{post.imagem.url}}">
+            <p class="conteudo-post">{{post.conteudo}}</p>
+        {% endfor %}
+    </section>
+    <hr>
+    <section class="d-grid">
+        <div>
+            {% for i in comentarios %}
+                <p>{{i.usuario}}</p>
+                <p>{{i.comentario}}</p>
+                <p>{{i.data_coment}}</p>
+            {% endfor %}
+        </div>
+        <div>
+            <form action="#" method="POST">
+                <textarea name="meu_comentario" id="" cols="30" rows="10">Escreva um Comentário</textarea>
+                <button type="submit">Comentar</button>
+            </form>
+        </div>
+    </section>
 </body>
-</html>
+{% include 'footer.html' %}

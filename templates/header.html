@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width= , initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="{% static 'perfilUser/css/style.css' %}">
+</head>
+
+<header>
+    <div class="div-header width-100">
+    </div>
+    <nav class="nav-header width-100 jus-cont-center">
+        <div class=" d-flex">
+            <div class="d-flex width-100">
+                <input placeholder="Busque por categorias ou títulos..." class="input-search" type="search" name="" id="">
+                <svg type="submit" class="icon-src" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                </svg>
+            </div>
+            <div class="div-sair d-flex">
+                <p class="input-usuario">{{usuario_logado}}</p>
+                <a class="input-sair" href="{% url 'logout' %}">Sair</a>
+            </div>
+        </div> 
+    </nav>
+</header>

@@ -1,15 +1,5 @@
-{% load static %}
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width= , initial-scale=1.0">
-    <title>{{usuario.nome}}</title>
-    <link rel="stylesheet" href="{% static 'perfilUser/css/style.css' %}">
-</head>
-<body> 
+{% include 'header.html' %}
+<body  class="body-conf"> 
     <section class="d-flex">
         <form class="d-grid" action="{% url 'cadastro_post' %}" method="POST" enctype="multipart/form-data">
             {%csrf_token%}
@@ -31,8 +21,16 @@
 
             <input name="autor" type="hidden" value="{{usuario_logado}}">
             <button type="submit">Postar</button>
+            {% if status == '0' %}
+                <p>Post realizado com sucesso</p>
+            {% endif %}
+
+            {% if status == '1' %}
+            <p>Não foi possível realizar a Postagem</p>
+            <p>Confira novamente os campos</p>
+        {% endif %}
         </form>
     </section>
 </body>
-</html>
+{% include 'footer.html' %}
 

@@ -14,6 +14,14 @@
     opacity: 0.8;
 }
 
+.flex-dir{
+    flex-direction: column;
+}
+
+.alg-itens-center{
+    align-items: center;
+}
+
 .d-grid{
     display: grid;
 }
@@ -163,4 +171,92 @@
     width: 40%;
 }
 
+/* HEADER */
 
+.width-100{
+    width: 100%;
+}
+
+.div-header{
+    height: 100px;
+    background-color: aqua;
+}
+
+.nav-header{
+    background-color: #848484;
+    height: 50px;
+}
+
+.input-search{
+    height: 30px;
+    margin: 0.8%;
+    width: 30%;
+    border: 1px solid transparent;
+    border-radius: 20px;
+    font-size: 20px;
+    padding: 10px;
+}
+
+.icon-src{
+    width: 25px;
+    height: 25px;
+    margin-top: 1%;
+    color: #ffffff;
+}
+
+.div-sair{
+    width: 20%;
+    justify-content: space-between;
+    margin: 10px;
+}
+
+.input-sair{
+    color: #ffffff;
+    font-size: 20px;
+}
+
+.input-usuario{
+    font-size: 20px;
+    color: white;
+    margin-right: 12%;
+
+}
+
+/* FOOTER */
+
+.div-footer{
+    background-color: #777777;
+    height: 50px;
+}
+
+.p-footer{
+    color: #ffffff;
+    font-size: 30px;
+    margin-top: 0.5%;
+}
+
+
+/*  Página de Visualização da notícia */
+
+.title-post{
+    font-size: 40px;
+    text-align: center;
+    margin: 5%;
+}
+
+.conteudo-post{
+    margin: 5%;
+    font-size: 25px;
+    text-align: center;
+}
+
+
+
+/* Página inicial Usuário Comum */
+
+.titulo-post{
+    margin: 5%;
+    text-align: center;
+    font-size: 30px;
+    color: #222222;
+}
