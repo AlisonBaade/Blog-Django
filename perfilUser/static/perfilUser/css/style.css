@@ -173,18 +173,25 @@
 
 /* HEADER */
 
+
+.img-topo{
+    height: 250;
+    border-radius: 20px;
+
+}
 .width-100{
     width: 100%;
 }
 
 .div-header{
-    height: 100px;
-    background-color: aqua;
+    height: 0px;
+    display: contents;
 }
 
 .nav-header{
-    background-color: #848484;
+    background-color: #ffa41f;
     height: 50px;
+    border-radius: 20px;
 }
 
 .input-search{
@@ -213,6 +220,7 @@
 .input-sair{
     color: #ffffff;
     font-size: 20px;
+    margin-right: 20px;
 }
 
 .input-usuario{
@@ -225,8 +233,9 @@
 /* FOOTER */
 
 .div-footer{
-    background-color: #777777;
+    background-color: #ffa41f;
     height: 50px;
+    border-radius: 20px;
 }
 
 .p-footer{
@@ -258,5 +267,5 @@
     margin: 5%;
     text-align: center;
     font-size: 30px;
-    color: #222222;
+    color:  #ffa41f;;
 }
