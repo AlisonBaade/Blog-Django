@@ -5,7 +5,7 @@
         <form class="d-grid" action="{% url 'cadastro_post' %}" method="POST" enctype="multipart/form-data">
             {%csrf_token%}
             <label for="imagem">Insira imagem principal do seu Post</label>
-            <input type="file" name="imagem" id=""  accept="image/*">
+            <input type="file" name="imagem" accept="image/*">
 
             <label for="titulo">Escreva um Título</label>
             <input name="titulo" type="text">

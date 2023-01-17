@@ -108,3 +108,22 @@ def excluir_post(request, id):
     if request.session.get('usuario'):
         post = Post.objects.filter(id=id).delete()
         return redirect('/posts/home')
+    
+    
+def alterar_post(request, id):
+
+    imagem_upload = request.FILES.get('imagem', None)
+    titulo = request.POST.get('titulo')
+    categoria = request.POST.get('categoria')
+    categoria_filtered = Categoria.objects.filter(nome=categoria).first()
+    conteudo = request.POST.get('conteudo')
+    
+    
+    post = Post.objects.get(id=id)
+    if post.autor.id == request.session['usuario']:
+        post.imagem = imagem_upload
+        post.titulo = titulo
+        post.categoria = categoria_filtered
+        post.conteudo = conteudo
+        post.save()
+        return redirect('/posts/home')
