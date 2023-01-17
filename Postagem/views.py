@@ -8,14 +8,16 @@ from django.core.paginator import Paginator
 
 
 def home(request):
-        categorias = Categoria.objects.all()
         usuario_req = request.session.get('usuario')
         usuario = Usuario.objects.filter(id=usuario_req).first()
         usuario_logado = usuario
+        post = Post.objects.filter(autor=usuario)
+        qnt_post = post.count()
         if usuario :
-            return render(request, 'home.html',{'categorias': categorias,
-                                                'usuario_logado': usuario_logado,
-                                                'usuario_autor': usuario,})
+            return render(request, 'home.html',{'usuario_logado' : usuario_logado,
+                                                'usuario_autor' : usuario,
+                                                'post': post,
+                                                'qnt_post' : qnt_post})
         else:
             return HttpResponse('Sem acesso')
 
@@ -24,7 +26,7 @@ def index(request):
     if request.session.get('usuario'):  
         categorias = Categoria.objects.filter()
         posts = Post.objects.all()
-        posts_paginator = Paginator(posts, 2)
+        posts_paginator = Paginator(posts, 10)
         page_num = request.GET.get('page')
         page = posts_paginator.get_page(page_num)
         usuario = Usuario.objects.filter(id=request.session.get('usuario')).first()
@@ -40,16 +42,41 @@ def ver_post(request, id):
         posts = Post.objects.filter(id = id)
         usuario = Usuario.objects.filter(id=request.session.get('usuario')).first()
         usuario_logado = usuario
-    ############ FILTRAR COMENTÁRIOS DA POSTAGEM ############
-        comentarios = Comentario.objects.all()
+        comentarios = Comentario.objects.filter(post=id)
 
         return render(request, 'ver_post.html', {'posts': posts,
                                                  'comentarios': comentarios,
                                                  'usuario_logado': usuario_logado})
 
 
+def edit_post(request, id):
+    if request.session.get('usuario'):
+        post = Post.objects.filter(id = id).first()
+        categorias = Categoria.objects.all()
+        usuario_req = request.session.get('usuario')
+        usuario = Usuario.objects.filter(id=usuario_req).first()
+        usuario_logado = usuario
+        return render(request, 'edit_post.html', {'post' : post,
+                                                  'categorias' : categorias,
+                                                  'usuario_logado' : usuario_logado})
+
+def cadastrar_post(request):
+    # PÁGINA DE CADASTRO DE POSTAGEM
+    if request.session.get('usuario'):
+        usuario_req = request.session.get('usuario')
+        usuario = Usuario.objects.filter(id=usuario_req).first()
+        usuario_logado = usuario
+        categorias = Categoria.objects.all()
+        status = request.GET.get('status')
+        return render(request, 'cadastrar_post.html', {'categorias' : categorias,
+                                                       'usuario_logado' : usuario_logado,
+                                                       'usuario_req' : usuario_req,
+                                                       'status' : status})
+
+
+
 def cadastro_post(request):
-    
+    # FORMULÁRIO DE CADASTRO DA POSTAGEM
     if request.method == 'POST':
         
         imagem_upload = request.FILES.get('imagem', None)
@@ -72,7 +99,12 @@ def cadastro_post(request):
         )
         if form:
             form.save()
-            return redirect('/posts/home/?status=0')
+            return redirect('/posts/cadastrar_post/?status=0')
         else:
-            return redirect('/posts/home/?status=1')
+            return redirect('/posts/cadastrar_post/?status=1')
     
+    
+def excluir_post(request, id):
+    if request.session.get('usuario'):
+        post = Post.objects.filter(id=id).delete()
+        return redirect('/posts/home')

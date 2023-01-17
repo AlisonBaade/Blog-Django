@@ -1,35 +1,22 @@
 {% include 'header.html' %}
 <body  class="body-conf"> 
-    <section class="d-flex">
-        <form class="d-grid" action="{% url 'cadastro_post' %}" method="POST" enctype="multipart/form-data">
-            {%csrf_token%}
-            <label for="imagem">Insira imagem principal do seu Post</label>
-            <input type="file" name="imagem" id=""  accept="image/*">
-
-            <label for="titulo">Escreva um Título</label>
-            <input name="titulo" type="text">
-            <label for="">Selecione a categoria em que seu post se encaixa</label>
-
-            <select name="categoria">
-                {% for categoria in categorias %}
-                <option value="{{categoria.nome}}">{{categoria.nome}}</option>
-                {% endfor %}
-            </select>
-
-            <label for="conteudo">Digite o conteúdo do seu Post</label>
-            <textarea name="conteudo" cols="30" rows="10"></textarea>
-
-            <input name="autor" type="hidden" value="{{usuario_logado}}">
-            <button type="submit">Postar</button>
-            {% if status == '0' %}
-                <p>Post realizado com sucesso</p>
-            {% endif %}
-
-            {% if status == '1' %}
-            <p>Não foi possível realizar a Postagem</p>
-            <p>Confira novamente os campos</p>
-        {% endif %}
-        </form>
+    <h1>Bem vindo Autor</h1>
+    <a href="{% url 'cadastrar_post' %}">Cadastrar Postagem</a>
+    <section>
+        <div>
+            {% for post in post %}
+                <a href="{% url 'edit_post' post.id %}">{{ post.titulo }}</a>
+                <img style="width: 400px;" src="{{post.imagem.url}}">
+                <p>{{post.data_cadastro}}</p>
+                <a href="{% url 'excluir_post' post.id %}" id="{{post.id}}">Excluir</a>
+            {% endfor %}
+        </div>
+        <div>
+            <h2>
+                Quantas vezes eu postei
+            </h2>
+            <p>{{ qnt_post }}</p>
+        </div>
     </section>
 </body>
 {% include 'footer.html' %}

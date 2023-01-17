@@ -1,0 +1,33 @@
+{% include 'header.html' %}
+
+
+<body class="body-conf">
+    <a href="{% url 'home' %}">Voltar</a>
+    <section>
+        <form action="#" method="POST">
+            {%csrf_token%}
+            <label for="imagem">Insira imagem principal do seu Post</label>
+            <input type="file" name="" accept="image/*">
+
+            <label for="titulo">Escreva um Título</label>
+            <input name="" type="text">
+            <label for="">Selecione a categoria em que seu post se encaixa</label>
+
+            <select name="categoria">
+                {% for categoria in categorias %}
+                <option value="{{categoria.nome}}">{{categoria.nome}}</option>
+                {% endfor %}
+            </select>
+
+            <label for="conteudo">Digite o conteúdo do seu Post</label>
+            <textarea name="conteudo" cols="30" rows="10"></textarea>
+
+            <input name="autor" type="hidden" value="{{usuario_req}}">
+            <button type="submit">Postar</button>
+    </section>
+    <div>
+        <a href="{% url 'home' %}">Voltar</a>
+    </div>
+
+</body>
+{% include 'footer.html' %}

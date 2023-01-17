@@ -5,6 +5,7 @@
         <div class="d-flex flex-dir alg-itens-center">
             <a class="titulo-post text-decoration" href="{% url 'ver_post' post.id %}">{{ post.titulo }}</a>
             <img style="width: 600px;" src="{{post.imagem.url}}">
+            <p>Publicado em {{ post.data_cadastro }}</p>
         </div>
     </div>
     {% endfor %}

@@ -1,0 +1,37 @@
+{% include 'header.html' %}
+<body class="body-conf">
+    <section class="d-flex">
+        <a href="{% url 'home' %}">Voltar</a>
+        <form class="d-grid" action="{% url 'cadastro_post' %}" method="POST" enctype="multipart/form-data">
+            {%csrf_token%}
+            <label for="imagem">Insira imagem principal do seu Post</label>
+            <input type="file" name="imagem" id=""  accept="image/*">
+
+            <label for="titulo">Escreva um Título</label>
+            <input name="titulo" type="text">
+            <label for="">Selecione a categoria em que seu post se encaixa</label>
+
+            <select name="categoria">
+                {% for categoria in categorias %}
+                <option value="{{categoria.nome}}">{{categoria.nome}}</option>
+                {% endfor %}
+            </select>
+
+            <label for="conteudo">Digite o conteúdo do seu Post</label>
+            <textarea name="conteudo" cols="30" rows="10"></textarea>
+
+            <input name="autor" type="hidden" value="{{usuario_req}}">
+            <button type="submit">Postar</button>
+            {% if status == '0' %}
+                <p>Post realizado com sucesso</p>
+            {% endif %}
+
+            {% if status == '1' %}
+            <p>Não foi possível realizar a Postagem</p>
+            <p>Confira novamente os campos</p>
+        {% endif %}
+        </form>
+    </section>
+    <a href="{% url 'home' %}">Voltar</a>
+</body>
+{% include 'footer.html' %}
