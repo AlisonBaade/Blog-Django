@@ -4,15 +4,17 @@ from django.http import HttpResponse
 from .models import Categoria, Post, Comentario
 from perfilUser.models import Usuario
 from datetime import datetime
+from django.core.paginator import Paginator
 
 
 def home(request):
         categorias = Categoria.objects.all()
         usuario_req = request.session.get('usuario')
-        usuario = Usuario.objects.filter(id=usuario_req)
+        usuario = Usuario.objects.filter(id=usuario_req).first()
+        usuario_logado = usuario
         if usuario :
             return render(request, 'home.html',{'categorias': categorias,
-                                                'usuario_logado': request.session.get('usuario'),
+                                                'usuario_logado': usuario_logado,
                                                 'usuario_autor': usuario,})
         else:
             return HttpResponse('Sem acesso')
@@ -21,12 +23,15 @@ def home(request):
 def index(request):
     if request.session.get('usuario'):  
         categorias = Categoria.objects.filter()
-        posts = Post.objects.filter()
+        posts = Post.objects.all()
+        posts_paginator = Paginator(posts, 2)
+        page_num = request.GET.get('page')
+        page = posts_paginator.get_page(page_num)
         usuario = Usuario.objects.filter(id=request.session.get('usuario')).first()
         usuario_logado = usuario
 
         return render(request, 'index.html', {'categorias': categorias,
-                                              'posts': posts,
+                                              'page': page,
                                               'usuario_logado' : usuario_logado})
     
     

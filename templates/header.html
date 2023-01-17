@@ -12,7 +12,7 @@
 
 <header>
     <div class="div-header width-100">
-        <img class="width-100 img-topo " src="{% static 'perfilUser/img/banner.jpg' %}" alt="">
+        <img class="width-100 img-topo " src="{% static 'perfilUser/img/banner-azul.jpg' %}" alt="">
     </div>
     <nav class="nav-header width-100 jus-cont-center">
         <div class=" d-flex">
@@ -22,7 +22,7 @@
                     <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
                 </svg>
             </div>
-            <div class="div-sair d-flex">
+            <div class="div-sair d-flex align">
                 <p class="input-usuario">{{usuario_logado}}</p>
                 <a class="input-sair" href="{% url 'logout' %}">Sair</a>
             </div>
