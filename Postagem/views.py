@@ -39,12 +39,12 @@ def index(request):
     
 def ver_post(request, id): 
     if request.session.get('usuario'):
-        posts = Post.objects.filter(id = id)
+        post = Post.objects.filter(id = id).first()
         usuario = Usuario.objects.filter(id=request.session.get('usuario')).first()
         usuario_logado = usuario
         comentarios = Comentario.objects.filter(post=id)
 
-        return render(request, 'ver_post.html', {'posts': posts,
+        return render(request, 'ver_post.html', {'post': post,
                                                  'comentarios': comentarios,
                                                  'usuario_logado': usuario_logado})
 
@@ -80,7 +80,8 @@ def cadastro_post(request):
     if request.method == 'POST':
         
         imagem_upload = request.FILES.get('imagem', None)
-
+        if imagem_upload == None:
+            imagem_upload = 'img_principal/sem-img.jpg'
         titulo = request.POST.get('titulo')
         categoria_name = request.POST.get('categoria')
         categoria_filtered = Categoria.objects.filter(nome=categoria_name).first()
@@ -113,13 +114,15 @@ def excluir_post(request, id):
 def alterar_post(request, id):
 
     imagem_upload = request.FILES.get('imagem', None)
+    if imagem_upload == None:
+        imagem_upload = 'img_principal/sem-img.jpg'
     titulo = request.POST.get('titulo')
     categoria = request.POST.get('categoria')
     categoria_filtered = Categoria.objects.filter(nome=categoria).first()
     conteudo = request.POST.get('conteudo')
     
-    
     post = Post.objects.get(id=id)
+    
     if post.autor.id == request.session['usuario']:
         post.imagem = imagem_upload
         post.titulo = titulo
@@ -127,3 +130,22 @@ def alterar_post(request, id):
         post.conteudo = conteudo
         post.save()
         return redirect('/posts/home')
+    
+    
+def comentario(request, id):
+
+    comentario = request.POST.get('comentario')
+    post = Post.objects.get(id=id)
+    id_usuario = request.session.get('usuario')
+    usuario = Usuario.objects.get(id=id_usuario)
+    
+    
+    
+    if len(comentario) < 10:
+        return HttpResponse('opa')
+    if len(comentario) > 100:
+        return HttpResponse('carai')
+    
+    comentario = Comentario(comentario=comentario, post=post, usuario=usuario)
+    comentario.save()
+    return redirect(f'ver_post', id)

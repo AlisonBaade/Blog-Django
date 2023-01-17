@@ -22,7 +22,6 @@ def valida_login(request):
     senha = sha256(senha.encode()).hexdigest()
 
     usuario = Usuario.objects.filter(email=email, senha=senha).first()
-
     
     if usuario:
         if usuario.tipo == "AU":
