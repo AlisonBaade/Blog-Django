@@ -10,6 +10,7 @@ from Postagem.models import Categoria
 def login(request):
     if request.session.get('usuario'):
         return redirect('posts/home/')
+    valida_login(request=request)
     status_cadastro = request.GET.get('status_cadastro')
     status_login = request.GET.get('status_login')
     return render(request, 'login.html', {'status_cadastro': status_cadastro,

@@ -1,28 +1,43 @@
-{% include 'header.html' %}
-
-<body class="body-conf">
-    <a href="{% url 'index' %}">Voltar</a>
-    <section class="d-flex flex-dir alg-itens-center">
-        <h1 class="title-post">{{post.titulo}}</h1>
-        <img style="width: 800px;" src="{{post.imagem.url}}">
-        <p class="conteudo-post">{{post.conteudo}}</p>
-    </section>
-    <hr>
-    <section class="d-grid">
+<body>
+    {% include 'header.html' %}
+    <div class="body-conf">
+        <section class="d-flex flex-dir alg-itens-center">
+            <div>
+                <a class="font-a" href="{% url 'index' %}">Voltar</a>
+            </div>
+                <h1 class="title-post">{{post.titulo}}</h1>
+                <img style="width: 800px;" src="{{post.imagem.url}}">
+                <p class="conteudo-post">{{post.conteudo}}</p>
+        </section>
+        <hr>
+        <section class="d-grid">
+            <h2>Comentários</h2>
+                {% for i in comentarios %}
+            <div class="section-com">
+                <div class="d-grid ">
+                    <p>{{i.usuario}} diz: {{i.comentario}}</p>
+                </div>
+                    <p class="font-data">{{i.data_coment}}</p>
+            </div>
+                {% endfor %}
+            <div>
+                <form action="{% url 'comentario' post.id %}" method="POST">
+                    {% csrf_token %}
+                    <div class="d-grid div-com">
+                        <textarea class="text-com" name="comentario" cols="30" rows="10" placeholder="Escreva um comentário..."></textarea>
+                        {% if status_comentario == '0' %}
+                            <p class="status-error">Seu comentário deve ter no máximo 100 caractéres</p>
+                        {% endif %}
+                        <div>
+                            <button class="btn-coment cursor-pointer" type="submit">Comentar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
         <div>
-            {% for i in comentarios %}
-                <p>{{i.usuario}}</p>
-                <p>{{i.comentario}}</p>
-                <p>{{i.data_coment}}</p>
-            {% endfor %}
+            <a class="font-a" href="{% url 'index' %}">Voltar</a>
         </div>
-        <div>
-            <form action="{% url 'comentario' post.id %}" method="POST">
-                {% csrf_token %}
-                <input name="comentario" cols="30" rows="10" placeholder="Escreva um comentário">
-                <button type="submit">Comentar</button>
-            </form>
-        </div>
-    </section>
+    </div>
+    {% include 'footer.html' %}
 </body>
-{% include 'footer.html' %}

@@ -43,10 +43,12 @@ def ver_post(request, id):
         usuario = Usuario.objects.filter(id=request.session.get('usuario')).first()
         usuario_logado = usuario
         comentarios = Comentario.objects.filter(post=id)
+        status_comentario = request.GET.get('status_comentario')
 
         return render(request, 'ver_post.html', {'post': post,
                                                  'comentarios': comentarios,
-                                                 'usuario_logado': usuario_logado})
+                                                 'usuario_logado' : usuario_logado,
+                                                 'status_comentario' : status_comentario})
 
 
 def edit_post(request, id):
@@ -133,19 +135,17 @@ def alterar_post(request, id):
     
     
 def comentario(request, id):
-
+    
     comentario = request.POST.get('comentario')
     post = Post.objects.get(id=id)
     id_usuario = request.session.get('usuario')
     usuario = Usuario.objects.get(id=id_usuario)
     
-    
-    
-    if len(comentario) < 10:
-        return HttpResponse('opa')
     if len(comentario) > 100:
-        return HttpResponse('carai')
+        return redirect('/posts/ver_post/' + str(id) + '?status_comentario=0')
+
     
     comentario = Comentario(comentario=comentario, post=post, usuario=usuario)
     comentario.save()
     return redirect(f'ver_post', id)
+

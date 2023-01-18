@@ -1,33 +1,32 @@
-{% include 'header.html' %}
-
-
-<body class="body-conf">
-    <a href="{% url 'home' %}">Voltar</a>
-    <section class="d-flex">
-        <form class="d-grid" action="{% url 'alterar_post' post.id %}" method="POST" enctype="multipart/form-data">
-            {%csrf_token%}
-            <label for="imagem">Insira imagem principal do seu Post</label>
-            <input type="file" name="imagem" accept="image/*">
-
-            <label for="titulo">Escreva um Título</label>
-            <input name="titulo" type="text" value="{{post.titulo}}">
-
-            <label for="categoria"> Categoria cadastrada: {{post.categoria}}</label>
-            <label for="">Selecione uma categoria</label>
-            <select name="categoria">
-                {% for categoria in categorias %}
-                <option value="{{categoria.nome}}">{{categoria.nome}}</option>
-                {% endfor %}
-            </select>
-
-            <label for="conteudo">Digite o conteúdo do seu Post</label>
-            <textarea name="conteudo" cols="30" rows="10">{{post.conteudo}}</textarea>
-
-            <button type="submit">Editar</button>
-    </section>
-    <div>
+<body>
+    {% include 'header.html' %}
+    <div class="body-conf">
         <a href="{% url 'home' %}">Voltar</a>
-    </div>
+        <section class="d-flex">
+            <form class="d-grid" action="{% url 'alterar_post' post.id %}" method="POST" enctype="multipart/form-data">
+                {%csrf_token%}
+                <label for="imagem">Insira imagem principal do seu Post</label>
+                <input type="file" name="imagem" accept="image/*">
 
+                <label for="titulo">Escreva um Título</label>
+                <input name="titulo" type="text" value="{{post.titulo}}">
+
+                <label for="categoria"> Categoria cadastrada: {{post.categoria}}</label>
+                <label for="">Selecione uma categoria</label>
+                <select name="categoria">
+                    {% for categoria in categorias %}
+                    <option value="{{categoria.nome}}">{{categoria.nome}}</option>
+                    {% endfor %}
+                </select>
+
+                <label for="conteudo">Digite o conteúdo do seu Post</label>
+                <textarea name="conteudo" cols="30" rows="10">{{post.conteudo}}</textarea>
+
+                <button type="submit">Editar</button>
+        </section>
+        <div>
+            <a href="{% url 'home' %}">Voltar</a>
+        </div>
+    </div>
+    {% include 'footer.html' %}
 </body>
-{% include 'footer.html' %}

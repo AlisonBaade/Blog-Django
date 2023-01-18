@@ -1,24 +1,28 @@
-{% include 'header.html' %}
-<body  class="body-conf">
-    {% for post in page.object_list %}
-    <div class="d-flex jus-cont-center">
-        <div class="d-flex flex-dir alg-itens-center">
-            <a class="titulo-post text-decoration" href="{% url 'ver_post' post.id %}">{{ post.titulo }}</a>
-            <img style="width: 600px;" src="{{post.imagem.url}}">
-            <p>Publicado em {{ post.data_cadastro }}</p>
+<body>
+    {% include 'header.html' %}
+    <div class="body-conf">
+        {% for post in page.object_list %}
+        <div class="d-flex jus-cont-center">
+            <div class="d-flex flex-dir alg-itens-center">
+                <a class="titulo-post text-decoration" href="{% url 'ver_post' post.id %}">{{ post.titulo }}</a>
+                <img style="width: 500px;" src="{{post.imagem.url}}">
+                <p class="cor-p-data">Publicado por: {{post.autor}}</p>
+                <p class="cor-p-data">em {{ post.data_cadastro }}</p>
+            </div>
+        </div>
+        <hr>
+        {% endfor %}
+    
+        <div>
+            <!-- verificando se existe uma página anterior -->
+            {% if page.has_previous %}
+                <a href="{% url 'index' %}?page={{page.previous_page_number}} ">Anterior</a>
+            {% endif %}
+            <!-- verificando se existe próxima pagina -->
+            {% if page.has_next %}
+                <a href="{% url 'index' %}?page={{page.next_page_number}} ">Próximo</a>
+            {% endif %}
         </div>
     </div>
-    {% endfor %}
-    <hr>
-    <div>
-        <!-- verificando se existe uma página anterior -->
-        {% if page.has_previous %}
-            <a href="{% url 'index' %}?page={{page.previous_page_number}} ">Anterior</a>
-        {% endif %}
-        <!-- verificando se existe próxima pagina -->
-        {% if page.has_next %}
-            <a href="{% url 'index' %}?page={{page.next_page_number}} ">Próximo</a>
-        {% endif %}
-    </div>
+    {% include 'footer.html' %}
 </body>
-{% include 'footer.html' %}
