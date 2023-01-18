@@ -1,21 +1,21 @@
 <body>
     {% include 'header.html' %}
     <div class="body-conf">
-        <div class="d-flex jus-cont-center div-h1">
-            <h1 class="h1-font">Minhas Postagens</h1>
-        </div>
-        <div class="d-flex flex-dir alg-itens-center">
+        <div class="d-flex flex-dir alg-itens-center btn-margin-top">
             <a class="text-decoration a-cad-post font-sans" href="{% url 'cadastrar_post' %}">Cadastrar Postagem</a>
             <h2 class="h1-font">Quantas vezes eu postei : {{ qnt_post }}</h2>
+        </div>
+        <div class="d-flex jus-cont-center div-h1">
+            <h1 class="h1-font">Minhas Postagens</h1>
         </div>
         <section class="d-flex flex-wrap flex-dir-unset">
             {% for post in post %}
             <div class="div-post">
                 <img style="width: 400px;" src="{{post.imagem.url}}">
                 <div class="d-flex flex-dir alg-itens-center font-a">
-                    <a class="text-decoration" href="{% url 'edit_post' post.id %}">{{ post.titulo }}</a>
+                    <a class="text-decoration a-titulo" href="{% url 'edit_post' post.id %}">{{ post.titulo }}</a>
                     <p>Postado em: {{post.data_cadastro}}</p>
-                    <a class="text-decoration" href="{% url 'excluir_post' post.id %}" id="{{post.id}}">Excluir</a>
+                    <a class="text-decoration btn-excluir" href="{% url 'excluir_post' post.id %}" id="{{post.id}}">Excluir</a>
                 </div>
             </div>
             {% endfor %}

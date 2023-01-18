@@ -2,29 +2,42 @@
     {% include 'header.html' %}
     <div class="body-conf">
         <a href="{% url 'home' %}">Voltar</a>
-        <section class="d-flex">
-            <form class="d-grid" action="{% url 'alterar_post' post.id %}" method="POST" enctype="multipart/form-data">
+        <section class="d-flex flex-dir alg-itens-center margin-top-section">
+            <div class="margin-b-h1 margin-div">
+                <h1 class="h1-cadastro font-sans">Edite seu Post</h1>
+            </div>
+            <form class="d-grid font-sans form-width" action="{% url 'alterar_post' post.id %}" method="POST" enctype="multipart/form-data">
                 {%csrf_token%}
-                <label for="imagem">Insira imagem principal do seu Post</label>
-                <input type="file" name="imagem" accept="image/*">
+                <div class="d-grid style-label margin-div">
+                    <label for="imagem">Mude a imagem principal do seu Post</label>
+                    <input type="file" name="imagem" accept="image/*">
+                </div>
 
-                <label for="titulo">Escreva um Título</label>
-                <input name="titulo" type="text" value="{{post.titulo}}">
+                <div class="d-grid style-label margin-div">
+                    <label for="titulo">Digite um novo título ou deixe o mesmo:</label>
+                    <input class="style-input" name="titulo" type="text" value="{{post.titulo}}">
+                </div>
 
-                <label for="categoria"> Categoria cadastrada: {{post.categoria}}</label>
-                <label for="">Selecione uma categoria</label>
-                <select name="categoria">
-                    {% for categoria in categorias %}
-                    <option value="{{categoria.nome}}">{{categoria.nome}}</option>
-                    {% endfor %}
-                </select>
+                <div class="d-grid style-label margin-div">
+                    <label class="margin-b-h1" for="categoria"> Categoria cadastrada no momento: {{post.categoria}}</label>
+                    <label for="categoria">Selecione a nova categoria</label>
+                    <select class="select-style" name="categoria">
+                        {% for categoria in categorias %}
+                            <option value="{{categoria.nome}}">{{categoria.nome}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div class="d-grid style-label margin-div">
+                    <label for="conteudo">Digite ou Edite o conteúdo do seu Post</label>
+                    <textarea class="text-area-style" name="conteudo" cols="30" rows="10">{{post.conteudo}}</textarea>
+                </div>
 
-                <label for="conteudo">Digite o conteúdo do seu Post</label>
-                <textarea name="conteudo" cols="30" rows="10">{{post.conteudo}}</textarea>
-
-                <button type="submit">Editar</button>
+                <div class="margin-div">
+                    <button class="btn-edit cursor-pointer" type="submit">Editar</button>
+                </div>
         </section>
-        <div>
+        <div class="width-100 text-end">
             <a href="{% url 'home' %}">Voltar</a>
         </div>
     </div>

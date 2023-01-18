@@ -10,7 +10,6 @@ from Postagem.models import Categoria
 def login(request):
     if request.session.get('usuario'):
         return redirect('posts/home/')
-    valida_login(request=request)
     status_cadastro = request.GET.get('status_cadastro')
     status_login = request.GET.get('status_login')
     return render(request, 'login.html', {'status_cadastro': status_cadastro,
@@ -93,12 +92,16 @@ def logout(request):
 ######################## ADMINISTRADOR #######################
 
 def home_adm(request):
-    usuarios = Usuario.objects.all()
-    qnt_usuarios = usuarios.count()
-    status = request.GET.get('status')
-    return render(request, 'home_adm.html', {'status': status,
-                                             'usuarios': usuarios,
-                                             'qnt_usuarios': qnt_usuarios})
+    if request.session.get('usuario'):
+        usuario = Usuario.objects.filter(id=request.session.get('usuario')).first()
+        usuario_logado = usuario
+        usuarios = Usuario.objects.all()
+        qnt_usuarios = usuarios.count()
+        status = request.GET.get('status')
+        return render(request, 'home_adm.html', {'status': status,
+                                                'usuarios': usuarios,
+                                                'qnt_usuarios': qnt_usuarios,
+                                                'usuario_logado': usuario_logado,})
 
 
 def cadastro_area_adm(request):

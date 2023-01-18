@@ -1,28 +1,39 @@
 <body>
     {% include 'header.html' %}
     <div class="body-conf">
-        <section class="d-flex">
-            <a href="{% url 'home' %}">Voltar</a>
-            <form class="d-grid" action="{% url 'cadastro_post' %}" method="POST" enctype="multipart/form-data">
+        <a href="{% url 'home' %}">Voltar</a>
+        <section class="d-flex flex-dir alg-itens-center margin-top-section">
+            <div class="margin-b-h1 margin-div">
+                <h1 class="h1-cadastro font-sans">Cadastre uma nova Postagem</h1>
+            </div>
+            <form class="d-grid font-sans form-width" action="{% url 'cadastro_post' %}" method="POST" enctype="multipart/form-data">
                 {%csrf_token%}
-                <label for="imagem">Insira imagem principal do seu Post</label>
-                <input type="file" name="imagem" accept="image/*">
-    
-                <label for="titulo">Escreva um Título</label>
-                <input name="titulo" type="text">
-                <label for="">Selecione a categoria em que seu post se encaixa</label>
-    
-                <select name="categoria">
-                    {% for categoria in categorias %}
-                    <option value="{{categoria.nome}}">{{categoria.nome}}</option>
-                    {% endfor %}
-                </select>
-    
-                <label for="conteudo">Digite o conteúdo do seu Post</label>
-                <textarea name="conteudo" cols="30" rows="10"></textarea>
+                <div  class="d-grid style-label margin-div">
+                    <label for="imagem">Insira imagem principal do seu Post</label>
+                    <input type="file" name="imagem" accept="image/*">
+                </div>
+                <div class="d-grid style-label margin-div">
+                    <label for="titulo">Escreva um Título</label>
+                    <input class="style-input" name="titulo" type="text">
+                </div>
+
+                <div class="d-grid style-label margin-div">
+                    <label for="">Selecione a categoria em que seu post se encaixa</label>
+                    <select class="select-style" name="categoria">
+                        {% for categoria in categorias %}
+                        <option value="{{categoria.nome}}">{{categoria.nome}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="d-grid style-label margin-div">
+                    <label for="conteudo">Digite o conteúdo do seu Post</label>
+                    <textarea class="text-area-style" name="conteudo" cols="30" rows="10"></textarea>
+                </div>
     
                 <input name="autor" type="hidden" value="{{usuario_req}}">
-                <button type="submit">Postar</button>
+                <div class="margin-div">
+                    <button class="btn-edit cursor-pointer" type="submit">Postar</button>
+                </div>
                 {% if status == '0' %}
                     <p>Post realizado com sucesso</p>
                 {% endif %}
@@ -33,7 +44,9 @@
             {% endif %}
             </form>
         </section>
-        <a href="{% url 'home' %}">Voltar</a>
+        <div class="width-100 text-end m-bottom">
+            <a href="{% url 'home' %}">Voltar</a>
+        </div>
     </div>
     {% include 'footer.html' %}
 </body>
