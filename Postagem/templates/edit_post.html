@@ -1,7 +1,6 @@
 <body>
     {% include 'header.html' %}
-    <div class="body-conf">
-        <a href="{% url 'home' %}">Voltar</a>
+    <div class="body-conf container">
         <section class="d-flex flex-dir alg-itens-center margin-top-section">
             <div class="margin-b-h1 margin-div">
                 <h1 class="h1-cadastro font-sans">Edite seu Post</h1>
@@ -37,10 +36,9 @@
                     <button class="btn-edit cursor-pointer" type="submit">Editar</button>
                 </div>
         </section>
-        <div class="width-100 text-end">
-            <a href="{% url 'home' %}">Voltar</a>
+        <div class="width-100 text-end btn-voltar-margin">
+            <a class="btn-voltar" href="{% url 'home' %}">Voltar</a>
         </div>
     </div>
-    <script src="{% static 'perfilUser/js/search.js' }"></script>
     {% include 'footer.html' %}
 </body>

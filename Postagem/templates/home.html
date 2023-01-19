@@ -12,15 +12,31 @@
             {% for post in post %}
             <div class="div-post">
                 <img style="width: 400px;" src="{{post.imagem.url}}">
-                <div class="d-flex flex-dir alg-itens-center font-a">
+                <div class="d-flex flex-dir alg-itens-center font-a max-width">
                     <a class="text-decoration a-titulo" href="{% url 'edit_post' post.id %}">{{ post.titulo }}</a>
                     <p>Postado em: {{post.data_cadastro}}</p>
-                    <a class="text-decoration btn-excluir" href="{% url 'excluir_post' post.id %}" id="{{post.id}}">Excluir</a>
+                    <button class="text-decoration btn-excluir" onclick="excluirPost('{{post.id}}')">Excluir</button>
                 </div>
             </div>
             {% endfor %}
         </section>
+        <div>
+            {% if post.has_previous %}
+                <a href="{% url 'home' %}?page={{post.previous_page_number}} ">Anterior</a>
+            {% endif %}
+            {% if post.has_next %}
+                <a href="{% url 'home' %}?page={{post.next_page_number}} ">Próximo</a>
+            {% endif %}
+        </div>
     </div>
-    <script src="{% static 'perfilUser/js/search.js' }"></script>
+    <script>
+        function excluirPost(post_id) {
+            const url = "{% url 'excluir_post' 123 %}"
+            const confirm = window.confirm("Deseja excluir?")
+            if (confirm) {
+                window.location.assign(url.replace('123', post_id))
+            }
+        }
+        </script>
     {% include 'footer.html' %}
 </body>

@@ -5,6 +5,14 @@
     padding: 0;
 }
 
+body{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 .img {
     background-image: url('/static/perfilUser/img/fundo-login.jpg');
     background-repeat: no-repeat;
@@ -142,7 +150,7 @@
     margin-right: 15%;
 }
 
-/* Área Administrador */
+/* ÁREA ADMINISTRADOR */
 
 .nav-div{
     width: 75%;
@@ -336,9 +344,7 @@ tr:nth-child(even){
     text-align: center;
 }
 
-
-
-/* Página inicial Usuário Comum */
+/* PÁGINA PRINCIPAL DO USUARIO COMUM */
 
 .titulo-post {
     margin: 5%;
@@ -346,10 +352,6 @@ tr:nth-child(even){
     font-size: 30px;
     color: #2d87ac;
 }
-
-
-
-/* PÁGINA PRINCIPAL DO USUARIO COMUM */
 
 .cor-p-data {
     color: #878585;
@@ -398,6 +400,12 @@ tr:nth-child(even){
     margin-bottom: 5%;
 }
 
+.btn-coment:hover{
+    border:1px solid #2d87ac;
+    color: #2d87ac;
+    background-color: #ffffff;
+}
+
 .font-a {
     font-size: 18px;
 }
@@ -434,7 +442,20 @@ tr:nth-child(even){
 }
 
 .div-post {
-    margin: 8%;
+    margin: 10%;
+    width: 30%;
+    margin-top: 2%;
+}
+
+.max-width{
+    max-width: 100%;
+}
+
+@media only screen and (max-width: 600px) and (min-width: 400px)  {
+
+}
+@media only screen and (max-width: 600px) and (min-width: 400px)  {
+    
 }
 
 .btn-excluir {
@@ -453,8 +474,7 @@ tr:nth-child(even){
 
 .margin-top-section {
     background-color: #2d87ac;
-    margin-top: 1%;
-    margin-bottom: 1%;
+    margin-top: 3%;
     border-radius: 20px;
 }
 
@@ -505,7 +525,7 @@ tr:nth-child(even){
     margin-top: 1%;
 }
 
-.btn-edit {
+.btn-edit{
     height: 30px;
     width: 15%;
     font-size: 20px;
@@ -516,10 +536,22 @@ tr:nth-child(even){
     margin-bottom: 1%;
 }
 
+.btn-edit:hover{
+    border: 1px solid #ffffff;
+    background-color: #2d87ac;
+    color: #ffffff;
+}
+
 .text-end {
     text-align: end;
 }
 
-.m-bottom {
-    margin-bottom: 3.5%;
+.btn-voltar{
+    text-decoration: none;
+    font-size: 25px;
+    color: #2d87ac;
+}
+
+.btn-voltar-margin{
+    margin-top: 1%;
 }

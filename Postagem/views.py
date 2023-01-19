@@ -13,11 +13,20 @@ def home(request):
         usuario_logado = usuario
         post = Post.objects.filter(autor=usuario)
         qnt_post = post.count()
+        search = request.GET.get('search') 
+
+        if search:
+            post = Post.objects.filter(autor=usuario,titulo__icontains=search)
+        else:
+            posts_paginator = Paginator(post, 10)
+            page_num = request.GET.get('page')
+            post = posts_paginator.get_page(page_num)
+
         if usuario.tipo == 'AU' :
             return render(request, 'home.html',{'usuario_logado' : usuario_logado,
                                                 'usuario_autor' : usuario,
                                                 'post': post,
-                                                'qnt_post' : qnt_post})
+                                                'qnt_post' : qnt_post,})
         else:
             return HttpResponse('Você não tem acesso a esta parte')
 
@@ -31,7 +40,7 @@ def index(request):
         if search:
             page = Post.objects.filter(titulo__icontains=search)
         else:
-            posts_paginator = Paginator(posts, 2)
+            posts_paginator = Paginator(posts, 10)
             page_num = request.GET.get('page')
             page = posts_paginator.get_page(page_num)
 
@@ -160,3 +169,8 @@ def comentario(request, id):
     comentario.save()
     return redirect(f'ver_post', id)
 
+
+def excluir_categoria(request, id):
+        if request.session.get('usuario'):
+            categoria = Categoria.objects.filter(id=id).delete()
+            return redirect('/cad_categoria/')

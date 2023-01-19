@@ -1,5 +1,4 @@
 $(document).ready(function(){
-    console.log('funcou');
 
     var searchBtn = $('#search-btn');
     var searchForm = $('#search-form');
@@ -8,3 +7,5 @@ $(document).ready(function(){
         searchForm.submit();
     });
 });
+
+

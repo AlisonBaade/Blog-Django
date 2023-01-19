@@ -37,12 +37,21 @@
             <div class="t-align">
                 <h2 class="font-h2-cat font-sans">Categorias Cadastradas</h2>
                 {% for categoria in categorias %}
-                <p class="p-categorias">{{categoria.nome}}</p>
-                <hr>
+                    <p name="categoria" id="categoria" class="p-categorias">{{categoria.nome}}</p>
+                    <button type="button" onclick="excluirCategoria('{{ categoria.id }}')">Excluir</button>
+                    <hr>
                 {% endfor %}
             </div>
         </section>
     </div>
-    <script src="{% static 'perfilUser/js/search.js' }"></script>
+    <script>
+    function excluirCategoria(categoria_id) {
+        const url = "{% url 'excluir_categoria' 123 %}"
+        const confirm = window.confirm("Deseja excluir?")
+        if (confirm) {
+            window.location.assign(url.replace('123', categoria_id))
+        }
+    }
+    </script>
     {% include 'footer.html' %}
 </body>

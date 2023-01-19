@@ -10,5 +10,6 @@ urlpatterns= [
     path('cadastrar_post/', views.cadastrar_post, name='cadastrar_post'), 
     path('excluir_post/<int:id>', views.excluir_post, name='excluir_post'), 
     path('alterar_post/<int:id>', views.alterar_post, name='alterar_post'), 
-    path('comentario/<int:id>', views.comentario, name='comentario'), 
+    path('comentario/<int:id>', views.comentario, name='comentario'),
+    path('excluir_categoria/<int:id>', views.excluir_categoria, name='excluir_categoria'),
 ]

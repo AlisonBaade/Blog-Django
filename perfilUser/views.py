@@ -22,11 +22,11 @@ def valida_login(request):
     senha = sha256(senha.encode()).hexdigest()
 
     usuario = Usuario.objects.filter(email=email, senha=senha).first()
-    
+
     if usuario:
         if usuario.tipo == "AU":
             request.session['usuario'] = usuario.id
-            return redirect('/posts/home/')                    
+            return redirect('/posts/home/')
         if usuario.tipo == 'CO':
             request.session['usuario'] = usuario.id
             return redirect('/posts/index')
@@ -35,7 +35,6 @@ def valida_login(request):
             return redirect('/home_adm')
     if not usuario:
         return redirect('/?status_login=0')
-                
 
 
 def valida_cadastro(request):
@@ -66,7 +65,7 @@ def valida_cadastro(request):
 
     if autor == 'on':
         try:
-            # criptografando a senha do usuario
+
             senha = sha256(senha.encode()).hexdigest()
             usuario = Usuario(tipo='AU', nome=nome, senha=senha, email=email)
             usuario.save()
@@ -91,24 +90,25 @@ def logout(request):
 
 ######################## ADMINISTRADOR #######################
 
+
 def home_adm(request):
     if request.session.get('usuario'):
-        usuario = Usuario.objects.filter(id=request.session.get('usuario')).first()
+        usuario = Usuario.objects.filter(
+            id=request.session.get('usuario')).first()
         usuario_logado = usuario
         usuarios = Usuario.objects.all()
         qnt_usuarios = usuarios.count()
         status = request.GET.get('status')
-        search = request.GET.get('search')             
+        search = request.GET.get('search')
         if search:
             usuarios = Usuario.objects.filter(nome__icontains=search)
-            
+
         if usuario.tipo == 'AD':
             return render(request, 'home_adm.html', {'status': status,
-                                                    'usuarios': usuarios,
-                                                    'qnt_usuarios': qnt_usuarios,
-                                                    'usuario_logado': usuario_logado,})
+                                                     'usuarios': usuarios,
+                                                     'qnt_usuarios': qnt_usuarios,
+                                                     'usuario_logado': usuario_logado, })
 
-            
 
 def cadastro_area_adm(request):
 
@@ -118,7 +118,7 @@ def cadastro_area_adm(request):
     senha = request.POST.get('senha')
     senha_1 = request.POST.get('senha1')
     sexo = request.POST.get('sexo')
-    
+
     usuario = Usuario.objects.filter(email=email)
 
     if len(nome.strip()) == 0:
@@ -135,19 +135,21 @@ def cadastro_area_adm(request):
 
     if senha != senha_1:
         return redirect('/home_adm/?status=5')
-    
+
     if autor == 'AU':
         try:
             senha = sha256(senha.encode()).hexdigest()
-            usuario = Usuario(tipo='AD', nome=nome, senha=senha, email=email, sexo_usuario=sexo)
+            usuario = Usuario(tipo='AD', nome=nome, senha=senha,
+                              email=email, sexo_usuario=sexo)
             usuario.save()
             return redirect('/home_adm/?status=0')
         except:
             return redirect('/home_adm/?status=4')
-    elif autor == 'AD': # CADASTRO APENAS DENTRO DA ÁREA DE ADM
+    elif autor == 'AD':  # CADASTRO APENAS DENTRO DA ÁREA DE ADM
         try:
             senha = sha256(senha.encode()).hexdigest()
-            usuario = Usuario(tipo='AD', nome=nome, senha=senha, email=email, sexo_usuario=sexo)
+            usuario = Usuario(tipo='AD', nome=nome, senha=senha,
+                              email=email, sexo_usuario=sexo)
             usuario.save()
 
             return redirect('/home_adm/?status=0')
@@ -156,31 +158,31 @@ def cadastro_area_adm(request):
 
 
 def cadastro_categoria(request):
-    
+
     nome = request.POST.get('nome_categoria')
     categoria = Categoria.objects.filter(nome=nome)
-    
+
     if len(nome.strip()) == 0:
         return redirect('/home_adm/?status=1')
-    
-    
+
     categoria = Categoria(nome=nome)
     categoria.save()
     return redirect('/cad_categoria/?status=0')
-    
-    
+
+
 def cad_categoria(request):
-     if request.session.get('usuario'):
-        usuario = Usuario.objects.filter(id=request.session.get('usuario')).first()
+    if request.session.get('usuario'):
+        usuario = Usuario.objects.filter(
+            id=request.session.get('usuario')).first()
         if usuario.tipo == 'AD':
             usuario_logado = usuario
             categorias = Categoria.objects.all()
             qnt_categoria = categorias.count()
             status = request.POST.get('status')
-            return render(request, 'cad_categoria.html', {'status': status,
-                                                        'categorias': categorias,
-                                                        'qnt_categoria': qnt_categoria,
-                                                        'usuario_logado' : usuario_logado})   
-
-
-
+            return render(request, 'cad_categoria.html',
+                          {'status': status,
+                           'categorias': categorias,
+                           'qnt_categoria': qnt_categoria,
+                           'usuario_logado': usuario_logado,
+                           }
+                          )
