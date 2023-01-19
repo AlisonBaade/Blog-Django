@@ -1,107 +1,106 @@
 {% load static %}
+
 <body>
     {% include 'header.html' %}
     <div class="body-conf">
-        <section>
-            <div class="header d-flex jus-cont-center">
-                <h1>Área de Administração MyBlog</h1>
-            </div>
-            <nav class="d-grid menu-nav">
-                <div class="d-grid t-align">
+        <div class="d-flex">
+            <nav class="t-align font-sans">
+                <div class="d-grid nav-div">
                     <a class="a-nav text-decoration" href="{% url 'home_adm' %}">Usuários</a>
                     <a class="a-nav text-decoration" href="{% url 'cad_categoria' %}">Categorias</a>
                 </div>
+                <div class="d-grid nav-div nav-div-m container-qnt-us">
+                    <h2 class="h2-qnt-us">Quantidade de usuários cadastrados no sistema</h2>
+                    <h3 class="h3-font-size">{{qnt_usuarios}}</h3>
+                </div>
             </nav>
-            <div class="d-flex jus-cont-center">
-                <form class="d-grid form-w" action="{% url 'cadastro_area_adm' %}" method="POST"> {% csrf_token %}
-                    <div class="d-grid">
-                        <label class="label" for="">Nome do Usuário</label>
-                        <input class="" type="text" name="nome" id="">
-                        {% if status == '1' %}
-                        <p class="status-error">Este campo não pode ser vazio</p>
-                        {% endif %}
-                    </div>
-                    <div class="d-grid">
-                        <label class="label" for="">Email</label>
-                        <input class="" type="text" name="email">
-                        {% if status == '2' %}
-                        <p class="status-error">Este campo não pode ser vazio</p>
-                        {% endif %}
-                    </div>
-                    <div class="d-grid">
-                        <label class="label" for="">Senha</label>
-                        <input class="" type="password" name="senha">
-                        {% if status == '3' %}
-                        <p class="status-error">Mínimo de 8 caractéres</p>
-                        {% endif %}
-                        {% if status == '5' %}
-                        <p class="status-error">Senhas não conferem</p>
-                        {% endif %}
-                    </div>
-                    <div class="d-grid">
-                        <label class="label" for="">Confirmação da Senha</label>
-                        <input class="" type="password" name="senha1">
-                        {% if status == '5' %}
-                        <p class="status-error">Senhas não conferem</p>
-                        {% endif %}
-                    </div>
-                    <div class="d-grid">
-                        <label class="label" for="">Nivel do Usuário</label>
-                        <select class="" name="autor">
-                            <option value="AD">Administrador</option>
-                            <option value="AU">Autor</option>
-                        </select>
-                    </div>
-                    <div class="d-grid">
-                        <label  class="label" for="">Sexo</label>
-                        <select name="sexo" id="">
-                            <option value="M">Masculino</option>
-                            <option value="F">Feminino</option>
-                        </select>
-                    </div>
-                    <div class="">
-                        <button class="" type="submit">Cadastrar</button>
-                    </div>
-                    <br>
-                    {% if status == '0' %}
-                    <p class="status-success">Cadastro realizado com sucesso</p>
+            <form class="d-grid form-w" action="{% url 'cadastro_area_adm' %}" method="POST"> {% csrf_token %}
+                <div>
+                    <h1 class="h1-font div-h1">Formulário de cadastro de Usuários</h1>
+                </div>
+                <div class="d-grid">
+                    <label class="label" for="nome">Nome do Usuário</label>
+                    <input class="input-adm-cad" type="text" name="nome">
+                    {% if status == '1' %}
+                    <p class="status-error">Este campo não pode ser vazio</p>
                     {% endif %}
-                    {% if status == '4'%}
-                    <p class="status-success">Usuário ja cadastrado</p>
+                </div>
+                <div class="d-grid">
+                    <label class="label" for="email">Email</label>
+                    <input class="input-adm-cad" type="text" name="email">
+                    {% if status == '2' %}
+                    <p class="status-error">Este campo não pode ser vazio</p>
                     {% endif %}
-                    {% if status == '6' %}
-                    <p class="status-error">Erro interno do Sistema</p>
+                </div>
+                <div class="d-grid">
+                    <label class="label" for="senha">Senha</label>
+                    <input class="input-adm-cad" type="password" name="senha">
+                    {% if status == '3' %}
+                    <p class="status-error">Mínimo de 8 caractéres</p>
                     {% endif %}
-                </form>
-            </div>
-        </section>
-        <section>
-            <div>
-                <table>   
-                    <tr>
+                    {% if status == '5' %}
+                    <p class="status-error">Senhas não conferem</p>
+                    {% endif %}
+                </div>
+                <div class="d-grid">
+                    <label class="label" for="senha1">Confirmação da Senha</label>
+                    <input class="input-adm-cad" type="password" name="senha1">
+                    {% if status == '5' %}
+                    <p class="status-error">Senhas não conferem</p>
+                    {% endif %}
+                </div>
+                <div class="d-grid">
+                    <label class="label" for="autor">Nivel do Usuário</label>
+                    <select class="input-adm-cad" name="autor">
+                        <option value="AD">Administrador</option>
+                        <option value="AU">Autor</option>
+                    </select>
+                </div>
+                <div class="d-grid">
+                    <label class="label" for="sexo">Sexo</label>
+                    <select class="input-adm-cad" name="sexo">
+                        <option value="M">Masculino</option>
+                        <option value="F">Feminino</option>
+                    </select>
+                </div>
+                <div class="btn-margin-top">
+                    <button class="input-adm-cad cursor-pointer btn-cad-adm" type="submit">Cadastrar</button>
+                </div>
+                <br>
+                {% if status == '0' %}
+                <p class="status-success">Cadastro realizado com sucesso</p>
+                {% endif %}
+                {% if status == '4'%}
+                <p class="status-success">Usuário ja cadastrado</p>
+                {% endif %}
+                {% if status == '6' %}
+                <p class="status-error">Erro interno do Sistema</p>
+                {% endif %}
+            </form>
+        </div>
+        <section class="d-flex flex-dir alg-itens-center width-100 margin-table">
+            <div class="width-100">
+                <table class="width-100 h3-font-size table-color t-align">
+                    <tr class="tam-campos-t">
                         <td>Nome</td>
                         <td>Email</td>
                         <td>Nível</td>
                         <td>Sexo</td>
                         <td>Data Nascimento</td>
                     </tr>
-                    <tr>
-                        {% for usuario in usuarios %}
+                    {% for usuario in usuarios %}
+                    <tr class="tam-campos-t">
                         <td>{{usuario.nome}}</td>
                         <td>{{usuario.email}}</td>
                         <td>{{usuario.tipo}}</td>
                         <td>{{usuario.sexo_usuario}}</td>
                         <td>{{usuario.data_nascimento}}</td>
                     </tr>
-                        {% endfor %}
+                    {% endfor %}
                 </table>
             </div>
-            <div>
-                <h2>Quantidade de usuários cadastrados</h2>
-                {{qnt_usuarios}}
-            </div>
         </section>
-
     </div>
+    <script src="{% static 'perfilUser/js/search.js' }"></script>
     {% include 'footer.html' %}
 </body>

@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200&family=Roboto+Slab&display=swap');
 
-*{
+* {
     margin: 0;
     padding: 0;
 }
 
-.img{
+.img {
     background-image: url('/static/perfilUser/img/fundo-login.jpg');
     background-repeat: no-repeat;
     background-size: cover;
@@ -14,54 +14,55 @@
     opacity: 0.8;
 }
 
-.flex-dir{
+.flex-dir {
     flex-direction: column;
 }
 
-.flex-dir-unset{
+.flex-dir-unset {
     flex-direction: unset;
 }
 
-.flex-dir-initial{
+.flex-dir-initial {
     flex-direction: initial;
 }
-.alg-itens-center{
+
+.alg-itens-center {
     align-items: center;
 }
 
-.d-grid{
+.d-grid {
     display: grid;
 }
 
-.d-flex{
+.d-flex {
     display: flex;
 }
 
-.flex-wrap{
+.flex-wrap {
     flex-wrap: wrap;
 }
 
-.jus-cont-center{
+.jus-cont-center {
     justify-content: center;
 }
 
-.jus-cont-between{
+.jus-cont-between {
     justify-content: space-between;
 }
 
-.pos-abs{
+.pos-abs {
     position: absolute;
 }
 
-.cursor-pointer{
+.cursor-pointer {
     cursor: pointer;
 }
 
-.text-decoration{
+.text-decoration {
     text-decoration: none;
 }
 
-.container-login{
+.container-login {
     margin-top: 5%;
     margin-left: 15%;
     width: 25%;
@@ -69,27 +70,27 @@
 
 }
 
-.container-cadastro{
+.container-cadastro {
     margin-left: 5%;
     width: 50%;
     height: 250px;
 }
 
-.tam-input{
+.tam-input {
     margin-top: 3px;
     height: 40px;
     width: 80%;
     padding-left: 10px;
     font-size: 17px;
     border-radius: 7px;
-    border: 1px solid transparent;                              
+    border: 1px solid transparent;
 }
 
-.div-width{
+.div-width {
     width: 70%;
 }
 
-.btn{
+.btn {
     margin-top: 5%;
     height: 40px;
     width: 50%;
@@ -99,125 +100,185 @@
     border: 1px solid transparent;
 }
 
-.btn:hover{
+.btn:hover {
     background-color: transparent;
     border: 1px solid #ffffff;
 }
 
-.label{
+.label {
     margin-top: 5px;
     font-size: 25px;
     font-family: 'Roboto';
 }
 
-.checkbox-cad{
+.checkbox-cad {
     width: 20px;
     margin-top: 7px;
     margin-left: 10px;
 }
 
-.status-success{
+.status-success {
     margin-top: 2px;
     font-weight: bold;
     font-size: 25px;
     color: rgb(8, 99, 0);
 }
 
-.status-error{
+.status-error {
     margin-top: 2px;
     font-weight: bold;
     font-size: 20px;
     color: red;
 }
 
-.d-width{
+.d-width {
     margin-top: 1%;
     width: 50%;
 }
 
-/* Área Administrador */
-
-.body-conf{
+.body-conf {
     background-color: #ffffff;
     margin-left: 15%;
     margin-right: 15%;
 }
 
-.header{
-    width: 100%;
-    height: 60px;
-    background-color: rgb(80, 80, 80);
-    font-size: 30px;
-    color: #ffffff;
-}
-.menu-nav{
-    background-color: rgb(80, 80, 80);
-    width: 20%;
+/* Área Administrador */
+
+.nav-div{
+    width: 75%;
+
 }
 
-.h1-header{
-    padding-top: 1%;
-    color: #ffffff;
-    font-size: 40px;
+.nav-div-m{
+    margin-bottom: 2%;
 }
 
-.a-nav{
+.container-qnt-us{
+    border: 1px solid #2d87ac;
+    height: 100px;
+}
+
+.h2-qnt-us{
+    font-size: 20px;
+    text-align: center;
+    margin-top: 2%;
+}
+
+.h3-font-size{
+    font-size: 25px;
+}
+.a-nav {
     width: 100%;
     height: 40px;
     font-size: 25px;
-    background-color: rgb(80, 80, 80);
+    background-color: #2d87ac;
+    border: 1px solid #2d87ac;
     color: #ffffff;
 }
 
-.a-nav:hover{
-    background-color: #c9c9c9;
-    color: black;
+.a-nav:hover {
+    background-color: #afe8ff;
+    color: #2d87ac;
 }
 
 .t-align{
     text-align: center;
 }
 
-.form-w{
-    width: 40%;
+.form-w {
+    width: 50%;
 }
+
+.input-adm-cad{
+    height: 40px;
+    font-size: 25px;
+    border-radius: 20px;
+    border: 1px solid #2d87ac;
+    background-color: #ffffff;
+}
+
+.btn-cad-adm{
+    width: 30%;
+    background-color: #2d87ac;
+    border: 1px solid #2d87ac;
+    color: #ffffff;
+
+}
+
+.btn-cad-adm:hover{
+    border: 1 px solid #2d87ac;
+    background-color: #ffffff;
+    color: #2d87ac;
+}
+
+.table-color{
+    background: #2d87ac;
+    color: #ffffff;
+    border: #ffffff;
+}
+
+tr:nth-child(even){
+    background: #ffffff;
+    color: #2d87ac;
+}
+
+.margin-table{
+    margin-top: 3%;
+    margin-bottom: 3%
+}
+
+.tam-campos-t{
+    height: 40px;
+}
+
+.font-h2-cat{
+    font-size: 30px;
+}
+
+.p-categorias{
+    margin-top: 3%;
+    font-size: 25px;
+}
+
 
 /* HEADER */
 
 
-.img-topo{
+.img-topo {
     height: 250;
 
 }
-.width-100{
+
+.width-100 {
     width: 100%;
 }
 
-.div-header{
+.div-header {
     height: 0px;
     display: contents;
 }
 
-.nav-header{
+.nav-header {
     background-color: #2d87ac;
     height: 50px;
 
 }
 
-.div-search{
+.div-search {
     width: 28%;
 }
 
-.div-nome-us{
+.div-nome-us {
     width: 32%;
     margin-left: 1%;
 }
 
-.div-sair{
+.div-sair {
     width: 32%;
     text-align: end;
 }
-.input-search{
+
+.input-search {
     height: 30px;
     margin: 0.8%;
     width: 80%;
@@ -227,20 +288,20 @@
     padding: 10px;
 }
 
-.icon-src{
+.icon-src {
     width: 25px;
     height: 25px;
     margin-top: 1%;
     color: #ffffff;
 }
 
-.input-sair{
+.input-sair {
     color: #ffffff;
     font-size: 20px;
     margin-right: 20px;
 }
 
-.input-usuario{
+.input-usuario {
     font-size: 20px;
     color: #ffffff;
     margin-right: 12%;
@@ -249,12 +310,12 @@
 
 /* FOOTER */
 
-.div-footer{
+.div-footer {
     background-color: #2d87ac;
     height: 50px;
 }
 
-.p-footer{
+.p-footer {
     color: #ffffff;
     font-size: 20px;
     margin-top: 0.5%;
@@ -263,13 +324,13 @@
 
 /*  Página de Visualização da notícia */
 
-.title-post{
+.title-post {
     font-size: 40px;
     text-align: center;
     margin: 5%;
 }
 
-.conteudo-post{
+.conteudo-post {
     margin: 5%;
     font-size: 25px;
     text-align: center;
@@ -279,24 +340,24 @@
 
 /* Página inicial Usuário Comum */
 
-.titulo-post{
+.titulo-post {
     margin: 5%;
     text-align: center;
     font-size: 30px;
-    color:  #2d87ac;
+    color: #2d87ac;
 }
 
 
 
 /* PÁGINA PRINCIPAL DO USUARIO COMUM */
 
-.cor-p-data{
+.cor-p-data {
     color: #878585;
 }
 
 /* SEÇÃO DE COMENTÁRIOS */
 
-.section-com{
+.section-com {
     background-color: #2d87ac;
     font-size: 20px;
     margin-top: 1%;
@@ -306,16 +367,16 @@
     color: #ffffff;
 }
 
-.font-data{
+.font-data {
     font-size: 15px;
 }
 
 
-.div-com{
+.div-com {
     width: 70%;
 }
 
-.text-com{
+.text-com {
     resize: none;
     margin-top: 2%;
     border: 1px solid transparent;
@@ -326,7 +387,7 @@
     background-color: #afe8ff;
 }
 
-.btn-coment{
+.btn-coment {
     margin-top: 0.2%;
     width: 100px;
     height: 30px;
@@ -337,23 +398,23 @@
     margin-bottom: 5%;
 }
 
-.font-a{
+.font-a {
     font-size: 18px;
 }
 
 /* PÁGINA INICIAL DO AUTOR */
 
 
-.div-h1{
+.div-h1 {
     margin-top: 2%;
     margin-bottom: 3%;
 }
 
-.h1-font{
+.h1-font {
     font-family: system-ui;
 }
 
-.a-cad-post{
+.a-cad-post {
     font-size: 25px;
     background-color: #2d87ac;
     color: #ffffff;
@@ -363,54 +424,55 @@
     margin-bottom: 1%;
 }
 
-.a-cad-post:hover{
+.a-cad-post:hover {
     background-color: #ffffff;
     color: #2d87ac;
 }
 
-.font-sans{
+.font-sans {
     font-family: sans-serif;
 }
 
-.div-post{
+.div-post {
     margin: 8%;
 }
 
-.btn-excluir{
+.btn-excluir {
     color: red;
 }
 
-.a-titulo{
+.a-titulo {
     font-size: 25px;
 }
 
-.btn-margin-top{
+.btn-margin-top {
     margin-top: 1%;
 }
 
 /*  PÁGINA DE EDIÇÃO E CADASTRO DE POSTS */
 
-.margin-top-section{
+.margin-top-section {
     background-color: #2d87ac;
     margin-top: 1%;
     margin-bottom: 1%;
     border-radius: 20px;
 }
 
-.margin-b-h1{
+.margin-b-h1 {
     margin-bottom: 1%;
 }
 
-.form-width{
+.form-width {
     width: 60%;
 }
-.style-label{
+
+.style-label {
     color: #ffffff;
     font-size: 30px;
     width: 100%;
 }
 
-.style-input{
+.style-input {
     height: 40px;
     font-size: 25px;
     border: 1px solid transparent;
@@ -418,23 +480,23 @@
     padding-left: 10px;
 }
 
-.margin-div{
+.margin-div {
     margin-top: 3%;
 }
 
-.h1-cadastro{
+.h1-cadastro {
     font-size: 35px;
     color: #ffffff;
 }
 
-.select-style{
+.select-style {
     height: 40px;
     border-radius: 20px;
     font-size: 25px;
     padding-left: 10px;
 }
 
-.text-area-style{
+.text-area-style {
     resize: none;
     height: 200px;
     font-size: 17px;
@@ -443,7 +505,7 @@
     margin-top: 1%;
 }
 
-.btn-edit{
+.btn-edit {
     height: 30px;
     width: 15%;
     font-size: 20px;
@@ -454,12 +516,10 @@
     margin-bottom: 1%;
 }
 
-.text-end{
+.text-end {
     text-align: end;
 }
 
-.m-bottom{
+.m-bottom {
     margin-bottom: 3.5%;
 }
-
-

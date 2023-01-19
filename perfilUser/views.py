@@ -98,11 +98,17 @@ def home_adm(request):
         usuarios = Usuario.objects.all()
         qnt_usuarios = usuarios.count()
         status = request.GET.get('status')
-        return render(request, 'home_adm.html', {'status': status,
-                                                'usuarios': usuarios,
-                                                'qnt_usuarios': qnt_usuarios,
-                                                'usuario_logado': usuario_logado,})
+        search = request.GET.get('search')             
+        if search:
+            usuarios = Usuario.objects.filter(nome__icontains=search)
+            
+        if usuario.tipo == 'AD':
+            return render(request, 'home_adm.html', {'status': status,
+                                                    'usuarios': usuarios,
+                                                    'qnt_usuarios': qnt_usuarios,
+                                                    'usuario_logado': usuario_logado,})
 
+            
 
 def cadastro_area_adm(request):
 
@@ -164,12 +170,17 @@ def cadastro_categoria(request):
     
     
 def cad_categoria(request):
-    categorias = Categoria.objects.all()
-    qnt_categoria = categorias.count()
-    status = request.POST.get('status')
-    return render(request, 'cad_categoria.html', {'status': status,
-                                                  'categorias': categorias,
-                                                  'qnt_categoria': qnt_categoria})   
+     if request.session.get('usuario'):
+        usuario = Usuario.objects.filter(id=request.session.get('usuario')).first()
+        if usuario.tipo == 'AD':
+            usuario_logado = usuario
+            categorias = Categoria.objects.all()
+            qnt_categoria = categorias.count()
+            status = request.POST.get('status')
+            return render(request, 'cad_categoria.html', {'status': status,
+                                                        'categorias': categorias,
+                                                        'qnt_categoria': qnt_categoria,
+                                                        'usuario_logado' : usuario_logado})   
 
 
 

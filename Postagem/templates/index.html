@@ -1,18 +1,20 @@
 <body>
     {% include 'header.html' %}
     <div class="body-conf">
-        {% for post in page.object_list %}
+        {% for post in page %}
         <div class="d-flex jus-cont-center">
             <div class="d-flex flex-dir alg-itens-center">
                 <a class="titulo-post text-decoration" href="{% url 'ver_post' post.id %}">{{ post.titulo }}</a>
                 <img style="width: 500px;" src="{{post.imagem.url}}">
                 <p class="cor-p-data">Publicado por: {{post.autor}}</p>
+                <p class="cor-p-data">Categoria: {{post.categoria}}</p>
                 <p class="cor-p-data">em {{ post.data_cadastro }}</p>
             </div>
         </div>
         <hr>
         {% endfor %}
-    
+        <div>
+        </div>
         <div>
             <!-- verificando se existe uma página anterior -->
             {% if page.has_previous %}

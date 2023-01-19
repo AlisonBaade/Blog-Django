@@ -1,59 +1,48 @@
 {% load static %}
-<!DOCTYPE html>
-<html lang="pt-BR">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Área Adm</title>
-    <link rel="stylesheet" href="{% static 'perfilUser/css/style.css' %}">
-</head>
-
-<body class="body-conf">
-    <section>
-        <div class="header d-flex jus-cont-center">
-            <h1>Área de Administração MyBlog</h1>
-        </div>
-        <nav class="d-grid menu-nav">
-            <div class="d-grid t-align">
-                <a class="a-nav text-decoration" href="{% url 'home_adm' %}">Usuários</a>
-                <a class="a-nav text-decoration" href="{% url 'cad_categoria' %}">Categorias</a>
-            </div>
-        </nav>
-        <br>
-        <br>
-        <div class="d-flex jus-cont-center">
-            <form class="d-grid" action="{% url 'cadastro_categoria' %}" method="POST"> {% csrf_token %}
-                <div>
-                    <label for="">Nome da Categoria</label>
-                    <input type="text" name="nome_categoria">
+<body>
+    {% include 'header.html' %}
+    <div class="body-conf">
+        <div class="d-flex">
+            <nav class="t-align font-sans">
+                <div class="d-grid nav-div">
+                    <a class="a-nav text-decoration" href="{% url 'home_adm' %}">Usuários</a>
+                    <a class="a-nav text-decoration" href="{% url 'cad_categoria' %}">Categorias</a>
+                </div>
+                <div class="d-grid nav-div nav-div-m container-qnt-us">
+                    <h2 class="h2-qnt-us">Quantidade de categorias cadastradas</h2>
+                    <h3 class="h3-font-size">{{qnt_categoria}}</h3>
+                </div>
+            </nav>
+            <form class="d-grid form-w" action="{% url 'cadastro_categoria' %}" method="POST"> {% csrf_token %}
+                <div class="t-align div-h1">
+                    <h1 class="h1-font ">Cadastro de Categorias</h1>
+                </div>
+                <div class="d-grid">
+                    <label class="label" for="">Nome da Categoria</label>
+                    <input class="input-adm-cad" type="text" name="nome_categoria">
                     {% if status == '1' %}
                     <p class="status-error">Este campo não pode ser vazio</p>
                     {% endif %}
                 </div>
-                <button type="submit">Cadastrar</button>
-                {% if status == '0' %}
-                <p class="status-success">Cadastro realizado com sucesso</p>
-                {% endif %}
+                <div class="btn-margin-top">
+                    <button class="input-adm-cad cursor-pointer btn-cad-adm" type="submit">Cadastrar</button>
+                    {% if status == '0' %}
+                    <p class="status-success">Cadastro realizado com sucesso</p>
+                    {% endif %}
+                </div>
             </form>
         </div>
-    </section>
-    <section>
-        <div>
-            <h2>Categorias Cadastradas</h2>
-            {% for categoria in categorias %}
-                <p>
-                    {{categoria.nome}}
-                </p>
-            {% endfor %}
-        </div>
-
-        <div>
-            <h3>Quantidade de categorias cadastradas</h3>
-            {{qnt_categoria}}
-        </div>
-    </section>
+        <section class="d-flex flex-dir alg-itens-center width-100 margin-table">
+            <div class="t-align">
+                <h2 class="font-h2-cat font-sans">Categorias Cadastradas</h2>
+                {% for categoria in categorias %}
+                <p class="p-categorias">{{categoria.nome}}</p>
+                <hr>
+                {% endfor %}
+            </div>
+        </section>
+    </div>
+    <script src="{% static 'perfilUser/js/search.js' }"></script>
+    {% include 'footer.html' %}
 </body>
-
-</html>

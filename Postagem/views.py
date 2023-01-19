@@ -13,42 +13,51 @@ def home(request):
         usuario_logado = usuario
         post = Post.objects.filter(autor=usuario)
         qnt_post = post.count()
-        if usuario :
+        if usuario.tipo == 'AU' :
             return render(request, 'home.html',{'usuario_logado' : usuario_logado,
                                                 'usuario_autor' : usuario,
                                                 'post': post,
                                                 'qnt_post' : qnt_post})
         else:
-            return HttpResponse('Sem acesso')
+            return HttpResponse('Você não tem acesso a esta parte')
 
 
 def index(request):
     if request.session.get('usuario'):  
-        categorias = Categoria.objects.filter()
+        categorias = Categoria.objects.all()
         posts = Post.objects.all()
-        posts_paginator = Paginator(posts, 10)
-        page_num = request.GET.get('page')
-        page = posts_paginator.get_page(page_num)
+        search = request.GET.get('search') 
+                    
+        if search:
+            page = Post.objects.filter(titulo__icontains=search)
+        else:
+            posts_paginator = Paginator(posts, 2)
+            page_num = request.GET.get('page')
+            page = posts_paginator.get_page(page_num)
+
         usuario = Usuario.objects.filter(id=request.session.get('usuario')).first()
         usuario_logado = usuario
-
-        return render(request, 'index.html', {'categorias': categorias,
-                                              'page': page,
-                                              'usuario_logado' : usuario_logado})
-    
+        if usuario.tipo == 'CO':
+            return render(request, 'index.html', {'categorias': categorias,
+                                                'page': page,
+                                                'usuario_logado' : usuario_logado,
+                                                'search' : search,})
+        else:
+            return HttpResponse('Você não tem acesso a esta parte')
     
 def ver_post(request, id): 
     if request.session.get('usuario'):
-        post = Post.objects.filter(id = id).first()
         usuario = Usuario.objects.filter(id=request.session.get('usuario')).first()
         usuario_logado = usuario
-        comentarios = Comentario.objects.filter(post=id)
-        status_comentario = request.GET.get('status_comentario')
+        if usuario.tipo == 'CO':
+            post = Post.objects.filter(id = id).first()
+            comentarios = Comentario.objects.filter(post=id)
+            status_comentario = request.GET.get('status_comentario')
 
-        return render(request, 'ver_post.html', {'post': post,
-                                                 'comentarios': comentarios,
-                                                 'usuario_logado' : usuario_logado,
-                                                 'status_comentario' : status_comentario})
+            return render(request, 'ver_post.html', {'post': post,
+                                                    'comentarios': comentarios,
+                                                    'usuario_logado' : usuario_logado,
+                                                    'status_comentario' : status_comentario})
 
 
 def edit_post(request, id):
@@ -57,23 +66,25 @@ def edit_post(request, id):
         categorias = Categoria.objects.all()
         usuario_req = request.session.get('usuario')
         usuario = Usuario.objects.filter(id=usuario_req).first()
-        usuario_logado = usuario
-        return render(request, 'edit_post.html', {'post' : post,
-                                                  'categorias' : categorias,
-                                                  'usuario_logado' : usuario_logado})
+        if usuario.tipo == 'AU':
+            usuario_logado = usuario
+            return render(request, 'edit_post.html', {'post' : post,
+                                                    'categorias' : categorias,
+                                                    'usuario_logado' : usuario_logado})
 
 def cadastrar_post(request):
     # PÁGINA DE CADASTRO DE POSTAGEM
     if request.session.get('usuario'):
         usuario_req = request.session.get('usuario')
         usuario = Usuario.objects.filter(id=usuario_req).first()
-        usuario_logado = usuario
-        categorias = Categoria.objects.all()
-        status = request.GET.get('status')
-        return render(request, 'cadastrar_post.html', {'categorias' : categorias,
-                                                       'usuario_logado' : usuario_logado,
-                                                       'usuario_req' : usuario_req,
-                                                       'status' : status})
+        if usuario.tipo == 'AU':
+            usuario_logado = usuario
+            categorias = Categoria.objects.all()
+            status = request.GET.get('status')
+            return render(request, 'cadastrar_post.html', {'categorias' : categorias,
+                                                        'usuario_logado' : usuario_logado,
+                                                        'usuario_req' : usuario_req,
+                                                        'status' : status})
 
 
 
