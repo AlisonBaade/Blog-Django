@@ -152,6 +152,17 @@ body{
 
 /* ÁREA ADMINISTRADOR */
 
+.btn-excluir-cat{
+    height: 40px;
+    background-color: red;
+    color: white;
+    padding-left: 7px;
+    padding-right: 7px;
+    border: 1px solid transparent;
+    border-radius: 20px;
+    font-size: 15px;
+}
+
 .nav-div{
     width: 75%;
 
@@ -249,6 +260,36 @@ tr:nth-child(even){
     font-size: 25px;
 }
 
+.form-exclusao{
+    background-color: antiquewhite;
+}
+
+.btn-confirm-excluir{
+    width: 50%;
+    margin-top: 3%;
+    height: 30px;
+    border: 1px solid transparent;
+    border-radius: 20px;
+    font-size: 20px;
+}
+
+.btn-sim{
+    background-color: #2d87ac;
+    color: #ffffff;
+}
+
+.btn-nao{
+    background-color: #8e0000;
+    color: #ffffff;
+}
+
+.h2-excluir{
+    font-size: 35px;
+}
+
+.h3-excluir{
+    font-size: 30px;
+}
 
 /* HEADER */
 
@@ -452,17 +493,14 @@ tr:nth-child(even){
     max-width: 100%;
 }
 
-.btn-excluir{
-    height: 30px;
-    width: 23%;
-    font-size: 15;
+
+.btn-excluir-post{
     background-color: red;
-    color: white;
-    border: 1px solid white;
+    padding: 5px;
+    border: 1px solid transparent;
     border-radius: 20px;
-
+    color: white;
 }
-
 .a-titulo {
     font-size: 25px;
 }
@@ -560,6 +598,10 @@ tr:nth-child(even){
 
 .btn-mudar-de-pg{
     text-decoration: none;
-    font-size: 20px;
-    color: #2d87ac;
+    font-size: 22px;
+    color: #ffffff;
+    background-color: #00415b;
+    border-radius: 10px;
+    padding-left: 7px;
+    padding-right: 7px;
 }

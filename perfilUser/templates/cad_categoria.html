@@ -1,6 +1,7 @@
 {% load static %}
 <body>
     {% include 'header.html' %}
+    {% if modal_exclusao.modal == 'nao' %}
     <div class="body-conf">
         <div class="d-flex">
             <nav class="t-align font-sans">
@@ -37,20 +38,26 @@
                 <h2 class="font-h2-cat font-sans">Categorias Cadastradas</h2>
                 {% for categoria in categorias %}
                     <p name="categoria" id="categoria" class="p-categorias">{{categoria.nome}}</p>
-                    <button class="btn-excluir" type="button" onclick="excluirCategoria('{{ categoria.id }}')">Excluir</button>
+                    <a class="text-decoration btn-excluir-cat" href="{% url  'req_exclusao' categoria.id%}">Excluir</a>
+                    <br>
                     <hr>
                 {% endfor %}
             </div>
         </section>
     </div>
-    <script>
-    function excluirCategoria(categoria_id) {
-        const url = "{% url 'excluir_categoria' 123 %}"
-        const confirm = window.confirm("Deseja excluir?")
-        if (confirm) {
-            window.location.assign(url.replace('123', categoria_id))
-        }
-    }
-    </script>
+    {% endif %}
+    {% if modal_exclusao.modal == 'sim' %}
+    <div class="d-flex flex-dir alg-itens-center font-sans">
+        <form class="d-grid t-align" action="{% url 'excluir_categoria' modal_exclusao.id %}" method="POST">
+            {% csrf_token %}
+            <h2 class="h2-excluir">Deseja realmente Excluir?</h2>
+            <h3 class="h3-excluir">Esta ação é irreversível!</h3>
+            <div class="d-flex flex-dir alg-itens-center ">
+                <input class="btn-confirm-excluir btn-sim cursor-pointer" name="excluir" type="submit" value="Sim">
+                <input class="btn-confirm-excluir btn-nao cursor-pointer" name="nao_excluir" type="submit" value="Não">
+            </div>
+        </form>
+    </div>
+    {% endif %}
     {% include 'footer.html' %}
 </body>

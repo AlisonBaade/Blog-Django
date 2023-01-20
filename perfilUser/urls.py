@@ -10,4 +10,5 @@ urlpatterns = [
     path('cadastro_area_adm/', views.cadastro_area_adm, name='cadastro_area_adm'),
     path('cadastro_categoria/', views.cadastro_categoria, name='cadastro_categoria'),
     path('cad_categoria/', views.cad_categoria, name='cad_categoria'),
+    path('req_exclusao/<int:id>', views.req_exclusao, name='req_exclusao'),
 ]

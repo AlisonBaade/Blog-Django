@@ -1,5 +1,6 @@
 <body>
     {% include 'header.html' %}
+    {% if modal_exclusao.modal == 'nao' %}
     <div class="body-conf">
         <div class="d-flex flex-dir alg-itens-center btn-margin-top">
             <a class="text-decoration a-cad-post font-sans" href="{% url 'cadastrar_post' %}">Cadastrar Postagem</a>
@@ -13,10 +14,9 @@
             <div class="div-post">
                 <img style="width: 400px;" src="{{post.imagem.url}}">
                 <div class="d-flex flex-dir alg-itens-center font-a max-width">
-                    <a class="text-decoration a-titulo t-align" href="{% url 'edit_post' post.id %}">{{ post.titulo
-                        }}</a>
+                    <a class="text-decoration a-titulo t-align" href="{% url 'edit_post' post.id %}">{{ post.titulo}}</a>
                     <p>Postado em: {{post.data_cadastro}}</p>
-                    <button class="text-decoration btn-excluir" onclick="excluirPost('{{post.id}}')">Excluir</button>
+                    <a href="{% url 'home_excluir' post.id %}" class="text-decoration btn-excluir-post">Excluir</a>
                 </div>
             </div>
             {% endfor %}
@@ -30,14 +30,19 @@
             {% endif %}
         </div>
     </div>
-    <script>
-        function excluirPost(post_id) {
-            const url = "{% url 'excluir_post' 123 %}"
-            const confirm = window.confirm("Deseja excluir?")
-            if (confirm) {
-                window.location.assign(url.replace('123', post_id))
-            }
-        }
-    </script>
+    {% endif %}
+    {% if modal_exclusao.modal == 'sim' %}
+    <div class="d-flex flex-dir alg-itens-center font-sans">
+        <form class="d-grid t-align" action="{% url 'excluir_post' modal_exclusao.id %}" method="POST">
+            {% csrf_token %}
+            <h2 class="h2-excluir">Deseja realmente Excluir?</h2>
+            <h3 class="h3-excluir">Esta ação é irreversível!</h3>
+            <div class="d-flex flex-dir alg-itens-center ">
+                <input class="btn-confirm-excluir btn-sim cursor-pointer" name="excluir" type="submit" value="Sim">
+                <input class="btn-confirm-excluir btn-nao cursor-pointer" name="nao_excluir" type="submit" value="Não">
+            </div>
+        </form>
+    </div>
+    {% endif %}
     {% include 'footer.html' %}
 </body>

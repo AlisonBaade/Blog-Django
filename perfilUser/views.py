@@ -184,7 +184,38 @@ def cad_categoria(request):
                            'categorias': categorias,
                            'qnt_categoria': qnt_categoria,
                            'usuario_logado': usuario_logado,
+                           'modal_exclusao' : {
+                                'modal' : 'nao',
+                            }    
                            }
                           )
+        else:
+            return redirect('/logout')
+    
+    
+        
+def req_exclusao (request, id):
+    if request.session.get('usuario'):
+        usuario = Usuario.objects.filter(id=request.session.get('usuario')).first()
+        if usuario.tipo == 'AD':
+            usuario_logado = usuario
+            categorias = Categoria.objects.all()
+            qnt_categoria = categorias.count()
+            status = request.POST.get('status')
+            search = request.GET.get('search')
+            if search:
+                categorias = Categoria.objects.filter(nome__icontains=search)
+            
+            return render(request, 'cad_categoria.html',
+                            {'status': status,
+                            'categorias': categorias,
+                            'qnt_categoria': qnt_categoria,
+                            'usuario_logado': usuario_logado,
+                            'modal_exclusao' : {
+                                'modal' : 'sim',
+                                'id' : id
+                            }
+                            }
+                        )
         else:
             return redirect('/logout')

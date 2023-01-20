@@ -12,4 +12,5 @@ urlpatterns= [
     path('alterar_post/<int:id>', views.alterar_post, name='alterar_post'), 
     path('comentario/<int:id>', views.comentario, name='comentario'),
     path('excluir_categoria/<int:id>', views.excluir_categoria, name='excluir_categoria'),
+    path('home_excluir/<int:id>', views.home_excluir, name='home_excluir'),
 ]
