@@ -203,6 +203,7 @@ body{
     border-radius: 20px;
     border: 1px solid #2d87ac;
     background-color: #ffffff;
+    padding-left: 1%;
 }
 
 .btn-cad-adm{
@@ -451,15 +452,15 @@ tr:nth-child(even){
     max-width: 100%;
 }
 
-@media only screen and (max-width: 600px) and (min-width: 400px)  {
+.btn-excluir{
+    height: 30px;
+    width: 23%;
+    font-size: 15;
+    background-color: red;
+    color: white;
+    border: 1px solid white;
+    border-radius: 20px;
 
-}
-@media only screen and (max-width: 600px) and (min-width: 400px)  {
-    
-}
-
-.btn-excluir {
-    color: red;
 }
 
 .a-titulo {
@@ -554,4 +555,11 @@ tr:nth-child(even){
 
 .btn-voltar-margin{
     margin-top: 1%;
+}
+
+
+.btn-mudar-de-pg{
+    text-decoration: none;
+    font-size: 20px;
+    color: #2d87ac;
 }

@@ -179,6 +179,10 @@ def cad_categoria(request):
             categorias = Categoria.objects.all()
             qnt_categoria = categorias.count()
             status = request.POST.get('status')
+            search = request.GET.get('search')
+            if search:
+                categorias = Categoria.objects.filter(nome__icontains=search)
+            
             return render(request, 'cad_categoria.html',
                           {'status': status,
                            'categorias': categorias,

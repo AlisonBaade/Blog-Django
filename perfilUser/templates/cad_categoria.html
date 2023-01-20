@@ -1,5 +1,4 @@
 {% load static %}
-
 <body>
     {% include 'header.html' %}
     <div class="body-conf">
@@ -38,7 +37,7 @@
                 <h2 class="font-h2-cat font-sans">Categorias Cadastradas</h2>
                 {% for categoria in categorias %}
                     <p name="categoria" id="categoria" class="p-categorias">{{categoria.nome}}</p>
-                    <button type="button" onclick="excluirCategoria('{{ categoria.id }}')">Excluir</button>
+                    <button class="btn-excluir" type="button" onclick="excluirCategoria('{{ categoria.id }}')">Excluir</button>
                     <hr>
                 {% endfor %}
             </div>

@@ -13,7 +13,7 @@
             <div class="div-post">
                 <img style="width: 400px;" src="{{post.imagem.url}}">
                 <div class="d-flex flex-dir alg-itens-center font-a max-width">
-                    <a class="text-decoration a-titulo" href="{% url 'edit_post' post.id %}">{{ post.titulo }}</a>
+                    <a class="text-decoration a-titulo t-align" href="{% url 'edit_post' post.id %}">{{ post.titulo }}</a>
                     <p>Postado em: {{post.data_cadastro}}</p>
                     <button class="text-decoration btn-excluir" onclick="excluirPost('{{post.id}}')">Excluir</button>
                 </div>

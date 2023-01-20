@@ -18,11 +18,11 @@
         <div>
             <!-- verificando se existe uma página anterior -->
             {% if page.has_previous %}
-                <a href="{% url 'index' %}?page={{page.previous_page_number}} ">Anterior</a>
+                <a class="btn-mudar-de-pg" href="{% url 'index' %}?page={{page.previous_page_number}} ">Anterior</a>
             {% endif %}
             <!-- verificando se existe próxima pagina -->
             {% if page.has_next %}
-                <a href="{% url 'index' %}?page={{page.next_page_number}} ">Próximo</a>
+                <a class="btn-mudar-de-pg" href="{% url 'index' %}?page={{page.next_page_number}} ">Próximo</a>
             {% endif %}
         </div>
     </div>
