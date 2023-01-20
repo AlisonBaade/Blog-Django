@@ -13,7 +13,8 @@
             <div class="div-post">
                 <img style="width: 400px;" src="{{post.imagem.url}}">
                 <div class="d-flex flex-dir alg-itens-center font-a max-width">
-                    <a class="text-decoration a-titulo t-align" href="{% url 'edit_post' post.id %}">{{ post.titulo }}</a>
+                    <a class="text-decoration a-titulo t-align" href="{% url 'edit_post' post.id %}">{{ post.titulo
+                        }}</a>
                     <p>Postado em: {{post.data_cadastro}}</p>
                     <button class="text-decoration btn-excluir" onclick="excluirPost('{{post.id}}')">Excluir</button>
                 </div>
@@ -22,10 +23,10 @@
         </section>
         <div>
             {% if post.has_previous %}
-                <a href="{% url 'home' %}?page={{post.previous_page_number}} ">Anterior</a>
+            <a href="{% url 'home' %}?page={{post.previous_page_number}} ">Anterior</a>
             {% endif %}
             {% if post.has_next %}
-                <a href="{% url 'home' %}?page={{post.next_page_number}} ">Próximo</a>
+            <a href="{% url 'home' %}?page={{post.next_page_number}} ">Próximo</a>
             {% endif %}
         </div>
     </div>
@@ -37,6 +38,6 @@
                 window.location.assign(url.replace('123', post_id))
             }
         }
-        </script>
+    </script>
     {% include 'footer.html' %}
 </body>

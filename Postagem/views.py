@@ -28,7 +28,7 @@ def home(request):
                                                 'post': post,
                                                 'qnt_post' : qnt_post,})
         else:
-            return HttpResponse('Você não tem acesso a esta parte')
+            return redirect('/logout')
 
 
 def index(request):
@@ -52,7 +52,7 @@ def index(request):
                                                 'usuario_logado' : usuario_logado,
                                                 'search' : search,})
         else:
-            return HttpResponse('Você não tem acesso a esta parte')
+            return redirect('/logout')
     
 def ver_post(request, id): 
     if request.session.get('usuario'):
@@ -95,15 +95,14 @@ def cadastrar_post(request):
                                                         'usuario_req' : usuario_req,
                                                         'status' : status})
 
-
-
 def cadastro_post(request):
     # FORMULÁRIO DE CADASTRO DA POSTAGEM
     if request.method == 'POST':
-        
         imagem_upload = request.FILES.get('imagem', None)
+        
         if imagem_upload == None:
             imagem_upload = 'img_principal/sem-img.jpg'
+            
         titulo = request.POST.get('titulo')
         categoria_name = request.POST.get('categoria')
         categoria_filtered = Categoria.objects.filter(nome=categoria_name).first()
@@ -132,17 +131,16 @@ def excluir_post(request, id):
         post = Post.objects.filter(id=id).delete()
         return redirect('/posts/home')
     
-    
 def alterar_post(request, id):
 
     imagem_upload = request.FILES.get('imagem', None)
     if imagem_upload == None:
         imagem_upload = 'img_principal/sem-img.jpg'
+        
     titulo = request.POST.get('titulo')
     categoria = request.POST.get('categoria')
     categoria_filtered = Categoria.objects.filter(nome=categoria).first()
-    conteudo = request.POST.get('conteudo')
-    
+    conteudo = request.POST.get('conteudo')  
     post = Post.objects.get(id=id)
     
     if post.autor.id == request.session['usuario']:
@@ -164,7 +162,6 @@ def comentario(request, id):
     if len(comentario) > 100:
         return redirect('/posts/ver_post/' + str(id) + '?status_comentario=0')
 
-    
     comentario = Comentario(comentario=comentario, post=post, usuario=usuario)
     comentario.save()
     return redirect(f'ver_post', id)

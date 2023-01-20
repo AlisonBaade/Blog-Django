@@ -20,7 +20,6 @@ def valida_login(request):
     email = request.POST.get('email')
     senha = request.POST.get('senha')
     senha = sha256(senha.encode()).hexdigest()
-
     usuario = Usuario.objects.filter(email=email, senha=senha).first()
 
     if usuario:
@@ -65,7 +64,6 @@ def valida_cadastro(request):
 
     if autor == 'on':
         try:
-
             senha = sha256(senha.encode()).hexdigest()
             usuario = Usuario(tipo='AU', nome=nome, senha=senha, email=email)
             usuario.save()
@@ -78,7 +76,6 @@ def valida_cadastro(request):
             senha = sha256(senha.encode()).hexdigest()
             usuario = Usuario(tipo='CO', nome=nome, senha=senha, email=email)
             usuario.save()
-
             return redirect('/?status_cadastro=0')
         except:
             return redirect('/?status_cadastro=4')
@@ -93,8 +90,7 @@ def logout(request):
 
 def home_adm(request):
     if request.session.get('usuario'):
-        usuario = Usuario.objects.filter(
-            id=request.session.get('usuario')).first()
+        usuario = Usuario.objects.filter(id=request.session.get('usuario')).first()
         usuario_logado = usuario
         usuarios = Usuario.objects.all()
         qnt_usuarios = usuarios.count()
@@ -108,6 +104,8 @@ def home_adm(request):
                                                      'usuarios': usuarios,
                                                      'qnt_usuarios': qnt_usuarios,
                                                      'usuario_logado': usuario_logado, })
+        else:
+            return redirect('/logout')
 
 
 def cadastro_area_adm(request):
@@ -151,7 +149,6 @@ def cadastro_area_adm(request):
             usuario = Usuario(tipo='AD', nome=nome, senha=senha,
                               email=email, sexo_usuario=sexo)
             usuario.save()
-
             return redirect('/home_adm/?status=0')
         except:
             return redirect('/home_adm/?status=4')
@@ -172,8 +169,7 @@ def cadastro_categoria(request):
 
 def cad_categoria(request):
     if request.session.get('usuario'):
-        usuario = Usuario.objects.filter(
-            id=request.session.get('usuario')).first()
+        usuario = Usuario.objects.filter(id=request.session.get('usuario')).first()
         if usuario.tipo == 'AD':
             usuario_logado = usuario
             categorias = Categoria.objects.all()
@@ -190,3 +186,5 @@ def cad_categoria(request):
                            'usuario_logado': usuario_logado,
                            }
                           )
+        else:
+            return redirect('/logout')

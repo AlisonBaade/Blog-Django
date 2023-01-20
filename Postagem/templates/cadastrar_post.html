@@ -5,9 +5,10 @@
             <div class="margin-b-h1 margin-div">
                 <h1 class="h1-cadastro font-sans">Cadastre uma nova Postagem</h1>
             </div>
-            <form class="d-grid font-sans form-width" action="{% url 'cadastro_post' %}" method="POST" enctype="multipart/form-data">
+            <form class="d-grid font-sans form-width" action="{% url 'cadastro_post' %}" method="POST"
+                enctype="multipart/form-data">
                 {%csrf_token%}
-                <div  class="d-grid style-label margin-div">
+                <div class="d-grid style-label margin-div">
                     <label for="imagem">Insira imagem principal do seu Post</label>
                     <input type="file" name="imagem" accept="image/*">
                 </div>
@@ -28,19 +29,19 @@
                     <label for="conteudo">Digite o conteúdo do seu Post</label>
                     <textarea class="text-area-style" name="conteudo" cols="30" rows="10"></textarea>
                 </div>
-    
+
                 <input name="autor" type="hidden" value="{{usuario_req}}">
                 <div class="margin-div">
                     <button class="btn-edit cursor-pointer" type="submit">Postar</button>
                 </div>
                 {% if status == '0' %}
-                    <p class="status-success ">Post realizado com sucesso</p>
+                <p class="status-success ">Post realizado com sucesso</p>
                 {% endif %}
-    
+
                 {% if status == '1' %}
                 <p class="status-error">Não foi possível realizar a Postagem</p>
                 <p class="status-error">Confira novamente os campos</p>
-            {% endif %}
+                {% endif %}
             </form>
         </section>
         <div class="width-100 text-end m-bottom">
