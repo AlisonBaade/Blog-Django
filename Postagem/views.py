@@ -28,14 +28,11 @@ def home(request):
                        'usuario_autor': usuario,
                        'post': post,
                        'qnt_post': qnt_post,
-                       'modal_exclusao': {
-                           'modal': 'nao'
-                        }
+                       'modal_exclusao': {'modal': 'nao'}
                        }
                       )
     else:
         return redirect('/logout')
-
 
 def home_excluir(request, id):
     usuario_req = request.session.get('usuario')
@@ -58,15 +55,12 @@ def home_excluir(request, id):
                        'usuario_autor': usuario,
                        'post': post,
                        'qnt_post': qnt_post,
-                       'modal_exclusao': {
-                           'modal': 'sim',
-                           'id': id
-                        }
+                       'modal_exclusao': {'modal': 'sim',
+                                          'id': id}
                        }
                       )
     else:
         return redirect('/logout')
-
 
 def index(request):
     if request.session.get('usuario'):
@@ -92,22 +86,19 @@ def index(request):
         else:
             return redirect('/logout')
 
-
 def ver_post(request, id):
     if request.session.get('usuario'):
-        usuario = Usuario.objects.filter(
-            id=request.session.get('usuario')).first()
+        usuario = Usuario.objects.filter(id=request.session.get('usuario')).first()
         usuario_logado = usuario
+        
         if usuario.tipo == 'CO':
             post = Post.objects.filter(id=id).first()
             comentarios = Comentario.objects.filter(post=id)
             status_comentario = request.GET.get('status_comentario')
-
             return render(request, 'ver_post.html', {'post': post,
                                                      'comentarios': comentarios,
                                                      'usuario_logado': usuario_logado,
                                                      'status_comentario': status_comentario})
-
 
 def edit_post(request, id):
     if request.session.get('usuario'):
@@ -120,7 +111,6 @@ def edit_post(request, id):
             return render(request, 'edit_post.html', {'post': post,
                                                       'categorias': categorias,
                                                       'usuario_logado': usuario_logado})
-
 
 def cadastrar_post(request):
     # PÁGINA DE CADASTRO DE POSTAGEM
@@ -136,19 +126,17 @@ def cadastrar_post(request):
                                                            'usuario_req': usuario_req,
                                                            'status': status})
 
-
 def cadastro_post(request):
     # FORMULÁRIO DE CADASTRO DA POSTAGEM
     if request.method == 'POST':
+        
         imagem_upload = request.FILES.get('imagem', None)
-
         if imagem_upload == None:
             imagem_upload = 'img_principal/sem-img.jpg'
 
         titulo = request.POST.get('titulo')
         categoria_name = request.POST.get('categoria')
-        categoria_filtered = Categoria.objects.filter(
-            nome=categoria_name).first()
+        categoria_filtered = Categoria.objects.filter(nome=categoria_name).first()
         autor = request.POST.get('autor')
         autor_filtered = Usuario.objects.filter(id=autor).first()
         data_cadastro = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
@@ -168,7 +156,6 @@ def cadastro_post(request):
         else:
             return redirect('/posts/cadastrar_post/?status=1')
 
-
 def excluir_post(request, id):
     if request.session.get('usuario'):
         
@@ -180,7 +167,6 @@ def excluir_post(request, id):
             return redirect('/posts/home')
         if nao_excluir:
             return redirect('/posts/home')
-
 
 def alterar_post(request, id):
 
@@ -202,7 +188,6 @@ def alterar_post(request, id):
         post.save()
         return redirect('/posts/home')
 
-
 def comentario(request, id):
 
     comentario = request.POST.get('comentario')
@@ -216,7 +201,6 @@ def comentario(request, id):
     comentario = Comentario(comentario=comentario, post=post, usuario=usuario)
     comentario.save()
     return redirect(f'ver_post', id)
-
 
 def excluir_categoria(request, id):
     if request.session.get('usuario'):

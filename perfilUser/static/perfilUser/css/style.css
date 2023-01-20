@@ -5,7 +5,7 @@
     padding: 0;
 }
 
-body{
+body {
     height: 100vh;
     width: 100vw;
     display: flex;
@@ -152,7 +152,7 @@ body{
 
 /* ÁREA ADMINISTRADOR */
 
-.btn-excluir-cat{
+.btn-excluir-cat {
     height: 40px;
     background-color: red;
     color: white;
@@ -163,29 +163,30 @@ body{
     font-size: 15px;
 }
 
-.nav-div{
+.nav-div {
     width: 75%;
 
 }
 
-.nav-div-m{
+.nav-div-m {
     margin-bottom: 2%;
 }
 
-.container-qnt-us{
+.container-qnt-us {
     border: 1px solid #2d87ac;
     height: 100px;
 }
 
-.h2-qnt-us{
+.h2-qnt-us {
     font-size: 20px;
     text-align: center;
     margin-top: 2%;
 }
 
-.h3-font-size{
+.h3-font-size {
     font-size: 25px;
 }
+
 .a-nav {
     width: 100%;
     height: 40px;
@@ -200,7 +201,7 @@ body{
     color: #2d87ac;
 }
 
-.t-align{
+.t-align {
     text-align: center;
 }
 
@@ -208,7 +209,7 @@ body{
     width: 50%;
 }
 
-.input-adm-cad{
+.input-adm-cad {
     height: 40px;
     font-size: 25px;
     border-radius: 20px;
@@ -217,7 +218,7 @@ body{
     padding-left: 1%;
 }
 
-.btn-cad-adm{
+.btn-cad-adm {
     width: 30%;
     background-color: #2d87ac;
     border: 1px solid #2d87ac;
@@ -225,46 +226,42 @@ body{
 
 }
 
-.btn-cad-adm:hover{
+.btn-cad-adm:hover {
     border: 1 px solid #2d87ac;
     background-color: #ffffff;
     color: #2d87ac;
 }
 
-.table-color{
+.table-color {
     background: #2d87ac;
     color: #ffffff;
     border: #ffffff;
 }
 
-tr:nth-child(even){
+tr:nth-child(even) {
     background: #ffffff;
     color: #2d87ac;
 }
 
-.margin-table{
+.margin-table {
     margin-top: 3%;
     margin-bottom: 3%
 }
 
-.tam-campos-t{
+.tam-campos-t {
     height: 40px;
 }
 
-.font-h2-cat{
+.font-h2-cat {
     font-size: 30px;
 }
 
-.p-categorias{
+.p-categorias {
     margin-top: 3%;
     font-size: 25px;
 }
 
-.form-exclusao{
-    background-color: antiquewhite;
-}
-
-.btn-confirm-excluir{
+.btn-confirm-excluir {
     width: 50%;
     margin-top: 3%;
     height: 30px;
@@ -273,39 +270,28 @@ tr:nth-child(even){
     font-size: 20px;
 }
 
-.btn-sim{
+.btn-sim {
     background-color: #2d87ac;
     color: #ffffff;
 }
 
-.btn-nao{
+.btn-nao {
     background-color: #8e0000;
     color: #ffffff;
 }
 
-.h2-excluir{
+.h2-excluir {
     font-size: 35px;
 }
 
-.h3-excluir{
+.h3-excluir {
     font-size: 30px;
 }
 
 /* HEADER */
 
-
-.img-topo {
-    height: 250;
-
-}
-
 .width-100 {
     width: 100%;
-}
-
-.div-header {
-    height: 0px;
-    display: contents;
 }
 
 .nav-header {
@@ -442,8 +428,8 @@ tr:nth-child(even){
     margin-bottom: 5%;
 }
 
-.btn-coment:hover{
-    border:1px solid #2d87ac;
+.btn-coment:hover {
+    border: 1px solid #2d87ac;
     color: #2d87ac;
     background-color: #ffffff;
 }
@@ -489,18 +475,19 @@ tr:nth-child(even){
     margin-top: 2%;
 }
 
-.max-width{
+.max-width {
     max-width: 100%;
 }
 
 
-.btn-excluir-post{
+.btn-excluir-post {
     background-color: red;
     padding: 5px;
     border: 1px solid transparent;
     border-radius: 20px;
     color: white;
 }
+
 .a-titulo {
     font-size: 25px;
 }
@@ -564,7 +551,7 @@ tr:nth-child(even){
     margin-top: 1%;
 }
 
-.btn-edit{
+.btn-edit {
     height: 30px;
     width: 15%;
     font-size: 20px;
@@ -575,7 +562,7 @@ tr:nth-child(even){
     margin-bottom: 1%;
 }
 
-.btn-edit:hover{
+.btn-edit:hover {
     border: 1px solid #ffffff;
     background-color: #2d87ac;
     color: #ffffff;
@@ -585,18 +572,18 @@ tr:nth-child(even){
     text-align: end;
 }
 
-.btn-voltar{
+.btn-voltar {
     text-decoration: none;
     font-size: 25px;
     color: #2d87ac;
 }
 
-.btn-voltar-margin{
+.btn-voltar-margin {
     margin-top: 1%;
 }
 
 
-.btn-mudar-de-pg{
+.btn-mudar-de-pg {
     text-decoration: none;
     font-size: 22px;
     color: #ffffff;

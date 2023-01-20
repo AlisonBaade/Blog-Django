@@ -1,5 +1,4 @@
 {% load static %}
-
 <body>
     {% include 'header.html' %}
     <div class="body-conf">
@@ -22,31 +21,31 @@
                     <label class="label" for="nome">Nome do Usuário</label>
                     <input class="input-adm-cad" type="text" name="nome">
                     {% if status == '1' %}
-                    <p class="status-error">Este campo não pode ser vazio</p>
+                        <p class="status-error">Este campo não pode ser vazio</p>
                     {% endif %}
                 </div>
                 <div class="d-grid">
                     <label class="label" for="email">Email</label>
                     <input class="input-adm-cad" type="text" name="email">
                     {% if status == '2' %}
-                    <p class="status-error">Este campo não pode ser vazio</p>
+                        <p class="status-error">Este campo não pode ser vazio</p>
                     {% endif %}
                 </div>
                 <div class="d-grid">
                     <label class="label" for="senha">Senha</label>
                     <input class="input-adm-cad" type="password" name="senha">
                     {% if status == '3' %}
-                    <p class="status-error">Mínimo de 8 caractéres</p>
+                        <p class="status-error">Mínimo de 8 caractéres</p>
                     {% endif %}
                     {% if status == '5' %}
-                    <p class="status-error">Senhas não conferem</p>
+                        <p class="status-error">Senhas não conferem</p>
                     {% endif %}
                 </div>
                 <div class="d-grid">
                     <label class="label" for="senha1">Confirmação da Senha</label>
                     <input class="input-adm-cad" type="password" name="senha1">
                     {% if status == '5' %}
-                    <p class="status-error">Senhas não conferem</p>
+                        <p class="status-error">Senhas não conferem</p>
                     {% endif %}
                 </div>
                 <div class="d-grid">
@@ -68,13 +67,13 @@
                 </div>
                 <br>
                 {% if status == '0' %}
-                <p class="status-success">Cadastro realizado com sucesso</p>
+                    <p class="status-success">Cadastro realizado com sucesso</p>
                 {% endif %}
                 {% if status == '4'%}
-                <p class="status-success">Usuário ja cadastrado</p>
+                    <p class="status-success">Usuário ja cadastrado</p>
                 {% endif %}
                 {% if status == '6' %}
-                <p class="status-error">Erro interno do Sistema</p>
+                    <p class="status-error">Erro interno do Sistema</p>
                 {% endif %}
             </form>
         </div>
@@ -89,13 +88,13 @@
                         <td>Data Nascimento</td>
                     </tr>
                     {% for usuario in usuarios %}
-                    <tr class="tam-campos-t">
-                        <td>{{usuario.nome}}</td>
-                        <td>{{usuario.email}}</td>
-                        <td>{{usuario.tipo}}</td>
-                        <td>{{usuario.sexo_usuario}}</td>
-                        <td>{{usuario.data_nascimento}}</td>
-                    </tr>
+                        <tr class="tam-campos-t">
+                            <td>{{usuario.nome}}</td>
+                            <td>{{usuario.email}}</td>
+                            <td>{{usuario.tipo}}</td>
+                            <td>{{usuario.sexo_usuario}}</td>
+                            <td>{{usuario.data_nascimento}}</td>
+                        </tr>
                     {% endfor %}
                 </table>
             </div>

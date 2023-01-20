@@ -2,7 +2,6 @@ from django.db import models
 from perfilUser.models import Usuario
 from datetime import datetime
 
-
 class Categoria(models.Model):
     nome = models.CharField(max_length=15)
 
@@ -11,7 +10,6 @@ class Categoria(models.Model):
 
     class Meta:
         ordering = ['nome']
-
 
 class Post(models.Model):
     imagem = models.ImageField(upload_to='img_principal', default='img_principal/sem-img.jpg')
@@ -23,7 +21,6 @@ class Post(models.Model):
 
     def __str__(self):
         return self.titulo
-
 
 class Comentario(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)

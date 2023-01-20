@@ -8,7 +8,6 @@ class Usuario(models.Model):
         ('AU', 'Autor'),
         ('CO', 'Comum')
     )
-    
     sexo = (
         ('M', 'Masculino'),
         ('F', 'Feminio')

@@ -15,7 +15,6 @@ def login(request):
     return render(request, 'login.html', {'status_cadastro': status_cadastro,
                                           'status_login': status_login, })
 
-
 def valida_login(request):
     email = request.POST.get('email')
     senha = request.POST.get('senha')
@@ -35,7 +34,6 @@ def valida_login(request):
     if not usuario:
         return redirect('/?status_login=0')
 
-
 def valida_cadastro(request):
 
     autor = request.POST.get('autor')
@@ -44,7 +42,6 @@ def valida_cadastro(request):
     senha = request.POST.get('senha')
     senha_1 = request.POST.get('senha1')
 
-    # verificando se não há nenhum email igual ja cadastrado
     usuario = Usuario.objects.filter(email=email)
 
     if len(nome.strip()) == 0:
@@ -67,7 +64,6 @@ def valida_cadastro(request):
             senha = sha256(senha.encode()).hexdigest()
             usuario = Usuario(tipo='AU', nome=nome, senha=senha, email=email)
             usuario.save()
-
             return redirect('/?status_cadastro=0')
         except:
             return redirect('/?status_cadastro=4')
@@ -80,13 +76,9 @@ def valida_cadastro(request):
         except:
             return redirect('/?status_cadastro=4')
 
-
 def logout(request):
     request.session.flush()
     return redirect('/')
-
-######################## ADMINISTRADOR #######################
-
 
 def home_adm(request):
     if request.session.get('usuario'):
@@ -107,7 +99,6 @@ def home_adm(request):
         else:
             return redirect('/logout')
 
-
 def cadastro_area_adm(request):
 
     autor = request.POST.get('autor')
@@ -116,7 +107,6 @@ def cadastro_area_adm(request):
     senha = request.POST.get('senha')
     senha_1 = request.POST.get('senha1')
     sexo = request.POST.get('sexo')
-
     usuario = Usuario.objects.filter(email=email)
 
     if len(nome.strip()) == 0:
@@ -153,7 +143,6 @@ def cadastro_area_adm(request):
         except:
             return redirect('/home_adm/?status=4')
 
-
 def cadastro_categoria(request):
 
     nome = request.POST.get('nome_categoria')
@@ -165,7 +154,6 @@ def cadastro_categoria(request):
     categoria = Categoria(nome=nome)
     categoria.save()
     return redirect('/cad_categoria/?status=0')
-
 
 def cad_categoria(request):
     if request.session.get('usuario'):
@@ -184,16 +172,12 @@ def cad_categoria(request):
                            'categorias': categorias,
                            'qnt_categoria': qnt_categoria,
                            'usuario_logado': usuario_logado,
-                           'modal_exclusao' : {
-                                'modal' : 'nao',
-                            }    
+                           'modal_exclusao' : {'modal' : 'nao',}    
                            }
                           )
         else:
             return redirect('/logout')
     
-    
-        
 def req_exclusao (request, id):
     if request.session.get('usuario'):
         usuario = Usuario.objects.filter(id=request.session.get('usuario')).first()
@@ -205,16 +189,14 @@ def req_exclusao (request, id):
             search = request.GET.get('search')
             if search:
                 categorias = Categoria.objects.filter(nome__icontains=search)
-            
+                
             return render(request, 'cad_categoria.html',
                             {'status': status,
                             'categorias': categorias,
                             'qnt_categoria': qnt_categoria,
                             'usuario_logado': usuario_logado,
-                            'modal_exclusao' : {
-                                'modal' : 'sim',
-                                'id' : id
-                            }
+                            'modal_exclusao' : {'modal' : 'sim',
+                                                'id' : id}
                             }
                         )
         else:

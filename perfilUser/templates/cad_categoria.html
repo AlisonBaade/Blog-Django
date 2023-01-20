@@ -22,13 +22,13 @@
                     <label class="label" for="">Nome da Categoria</label>
                     <input class="input-adm-cad" type="text" name="nome_categoria">
                     {% if status == '1' %}
-                    <p class="status-error">Este campo não pode ser vazio</p>
+                        <p class="status-error">Este campo não pode ser vazio</p>
                     {% endif %}
                 </div>
                 <div class="btn-margin-top">
                     <button class="input-adm-cad cursor-pointer btn-cad-adm" type="submit">Cadastrar</button>
                     {% if status == '0' %}
-                    <p class="status-success">Cadastro realizado com sucesso</p>
+                        <p class="status-success">Cadastro realizado com sucesso</p>
                     {% endif %}
                 </div>
             </form>
@@ -47,17 +47,17 @@
     </div>
     {% endif %}
     {% if modal_exclusao.modal == 'sim' %}
-    <div class="d-flex flex-dir alg-itens-center font-sans">
-        <form class="d-grid t-align" action="{% url 'excluir_categoria' modal_exclusao.id %}" method="POST">
-            {% csrf_token %}
-            <h2 class="h2-excluir">Deseja realmente Excluir?</h2>
-            <h3 class="h3-excluir">Esta ação é irreversível!</h3>
-            <div class="d-flex flex-dir alg-itens-center ">
-                <input class="btn-confirm-excluir btn-sim cursor-pointer" name="excluir" type="submit" value="Sim">
-                <input class="btn-confirm-excluir btn-nao cursor-pointer" name="nao_excluir" type="submit" value="Não">
-            </div>
-        </form>
-    </div>
+        <div class="d-flex flex-dir alg-itens-center font-sans">
+            <form class="d-grid t-align" action="{% url 'excluir_categoria' modal_exclusao.id %}" method="POST">
+                {% csrf_token %}
+                <h2 class="h2-excluir">Deseja realmente Excluir?</h2>
+                <h3 class="h3-excluir">Esta ação é irreversível!</h3>
+                <div class="d-flex flex-dir alg-itens-center ">
+                    <input class="btn-confirm-excluir btn-sim cursor-pointer" name="excluir" type="submit" value="Sim">
+                    <input class="btn-confirm-excluir btn-nao cursor-pointer" name="nao_excluir" type="submit" value="Não">
+                </div>
+            </form>
+        </div>
     {% endif %}
     {% include 'footer.html' %}
 </body>
