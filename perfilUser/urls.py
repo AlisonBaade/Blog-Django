@@ -11,4 +11,5 @@ urlpatterns = [
     path('cadastro_categoria/', views.cadastro_categoria, name='cadastro_categoria'),
     path('cad_categoria/', views.cad_categoria, name='cad_categoria'),
     path('req_exclusao/<int:id>', views.req_exclusao, name='req_exclusao'),
+    path('gerar_relatorio/', views.gerar_relatorio, name='gerar_relatorio'),
 ]

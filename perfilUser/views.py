@@ -4,7 +4,11 @@ from .models import Usuario
 from hashlib import sha256
 from . import views
 from django.utils.timezone import timezone
-from Postagem.models import Categoria
+from Postagem.models import Categoria, Post
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import A4
+from reportlab.platypus import Paragraph
+from django.db.models import F, Q
 
 
 def login(request):
@@ -95,7 +99,7 @@ def home_adm(request):
             return render(request, 'home_adm.html', {'status': status,
                                                      'usuarios': usuarios,
                                                      'qnt_usuarios': qnt_usuarios,
-                                                     'usuario_logado': usuario_logado, })
+                                                     'usuario_logado': usuario_logado,})
         else:
             return redirect('/logout')
 
@@ -201,3 +205,33 @@ def req_exclusao (request, id):
                         )
         else:
             return redirect('/logout')
+
+def gerar_relatorio(request):
+    posts = Post.objects.annotate(
+        nome_autor=F('autor__nome'),
+        nome_categoria=F('categoria__nome')
+    )
+    
+    cnv = canvas.Canvas("posts.pdf", pagesize=A4)
+    cnv.setFont("Times-Roman",18)
+    cnv.drawString(210,800, 'Relatório de Postagens')
+    pos_x = 60
+    pos_y = 750
+
+    for post in posts:
+        cnv.setFont("Times-Roman", 10)
+        cnv.drawString(pos_x,pos_y, post.titulo)
+        pos_y -= 25
+        cnv.drawString(pos_x, pos_y, post.nome_autor)
+        pos_y -= 25
+        cnv.drawString(pos_x,pos_y, post.nome_categoria)
+        pos_y -= 40
+        
+        if pos_y <= 150:
+            cnv.showPage()
+            cnv.setFont("Times-Roman",18)
+            cnv.drawString(210,800, 'Relatório de Postagens')
+            pos_y = 750
+              
+    cnv.save()
+    return redirect('/home_adm')

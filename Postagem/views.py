@@ -75,8 +75,7 @@ def index(request):
             page_num = request.GET.get('page')
             page = posts_paginator.get_page(page_num)
 
-        usuario = Usuario.objects.filter(
-            id=request.session.get('usuario')).first()
+        usuario = Usuario.objects.filter(id=request.session.get('usuario')).first()
         usuario_logado = usuario
         if usuario.tipo == 'CO':
             return render(request, 'index.html', {'categorias': categorias,
